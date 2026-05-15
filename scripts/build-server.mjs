@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { cpSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, extname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
@@ -28,7 +28,6 @@ if (!checkOnly) {
 
 for (const file of listFiles(srcRoot)) {
   const rel = relative(srcRoot, file);
-  if (isExcluded(rel)) continue;
 
   if (file.endsWith('.ts')) {
     transpileTypeScript(file, rel);
@@ -43,7 +42,6 @@ if (diagnostics.length > 0) {
 }
 
 if (!checkOnly) {
-  copyDynamicUi();
   console.log('Built server files into dist/');
 } else {
   console.log('TypeScript syntax/transpile check passed.');
@@ -70,12 +68,6 @@ function copyAsset(from, to) {
   cpSync(from, to, { recursive: true });
 }
 
-function copyDynamicUi() {
-  const uiDist = join(srcRoot, 'ui', 'react-app', 'dist');
-  if (!existsSync(uiDist)) return;
-  copyAsset(uiDist, join(distRoot, 'ui', 'react-app', 'dist'));
-}
-
 function listFiles(dir) {
   const entries = readdirSync(dir, { withFileTypes: true });
   const files = [];
@@ -88,10 +80,6 @@ function listFiles(dir) {
     }
   }
   return files;
-}
-
-function isExcluded(rel) {
-  return rel.startsWith('ui/') || rel.startsWith('apps/');
 }
 
 function shouldCopy(file) {

@@ -7285,5 +7285,29 @@
         "description": "Get submission by ending of this date. By default it will be current date(YYYY-MM-DD)."
       }
     ]
+  },
+  {
+    "name": "official_users_get_user_by_location",
+    "method": "GET",
+    "path": "/users/",
+    "app": "users",
+    "summary": "Get User by Location",
+    "operationId": "get-user-by-location",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "users.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
   }
 ]

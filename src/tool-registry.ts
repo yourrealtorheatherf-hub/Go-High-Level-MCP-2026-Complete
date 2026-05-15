@@ -10,7 +10,6 @@
 
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { ToolAnnotations, Tool } from '@modelcontextprotocol/sdk/types.js';
-import { z } from 'zod';
 
 import { GHLApiClient } from './clients/ghl-api-client.js';
 import { ContactTools } from './tools/contact-tools.js';
@@ -126,18 +125,6 @@ function inferAnnotations(toolName: string, meta?: any): ToolAnnotations {
     idempotentHint: isIdempotent,
     openWorldHint: true, // All tools interact with GHL API
   };
-}
-
-/**
- * Convert JSON Schema inputSchema to a Zod passthrough object
- * We use z.object({}).passthrough() to accept any args since the
- * original schemas are JSON Schema, not Zod. The MCP SDK will
- * still send the original JSON Schema to clients.
- */
-function makeZodSchema(_jsonSchema: any): z.ZodTypeAny {
-  // Use a catch-all that accepts any object
-  // The actual validation happens in the tool handler
-  return z.object({}).passthrough();
 }
 
 // ─── Tool Registry ──────────────────────────────────────────

@@ -4,12 +4,12 @@ Generated from `docs/ghl-api-coverage.json`.
 
 ## Summary
 
-- Total local-only endpoint references: 260
+- Total local-only endpoint references: 253
 - Changelog-only Notes endpoints: 8
-- Legacy/private/internal endpoints: 82
-- Compatibility wrappers: 48
+- Legacy/private/internal endpoints: 78
+- Compatibility wrappers: 47
 - Dynamic or templated endpoints needing manual mapping: 82
-- Needs manual review: 40
+- Needs manual review: 38
 
 ## Changelog-Only Notes
 
@@ -58,9 +58,6 @@ Generated from `docs/ghl-api-coverage.json`.
 - `GET /phone-system/recordings${qs ` (src/tools/phone-system-tools.ts)
 - `GET /phone-system/recordings/{param}` (src/tools/phone-system-tools.ts)
 - `GET /phone-system/voicemail${qs ` (src/tools/phone-system-tools.ts)
-- `GET /phone/calls` (src/apps/index.ts)
-- `GET /phone/numbers` (src/apps/index.ts)
-- `GET /proposals/` (src/apps/index.ts)
 - `GET /saas-api/public-api/locations/by-company` (src/tools/saas-tools.ts)
 - `GET /saas-api/public-api/locations/{param}` (src/tools/saas-tools.ts)
 - `GET /saas-api/public-api/locations/{param}/subscription` (src/tools/saas-tools.ts)
@@ -69,11 +66,10 @@ Generated from `docs/ghl-api-coverage.json`.
 - `GET /snapshots/{param}` (src/tools/snapshots-tools.ts)
 - `GET /snapshots/{param}/push` (src/tools/snapshots-tools.ts)
 - `GET /snapshots/{param}/push/{param}` (src/tools/snapshots-tools.ts)
-- `GET /triggers/` (src/apps/index.ts)
+- `GET /triggers/` (src/tools/triggers-tools.ts)
 - `GET /triggers/types` (src/tools/triggers-tools.ts)
 - `GET /triggers/{param}` (src/tools/triggers-tools.ts)
 - `GET /triggers/{param}/logs` (src/tools/triggers-tools.ts)
-- `GET /voice-ai/calls` (src/apps/index.ts)
 - `GET /workflows/${qs ` (src/tools/workflow-tools.ts)
 - `GET /workflows/{param}/executions${qs ` (src/tools/workflow-tools.ts)
 - `GET /workflows/{param}{param}` (src/tools/workflow-tools.ts)
@@ -118,13 +114,12 @@ Generated from `docs/ghl-api-coverage.json`.
 - `DELETE /templates/social/{param}` (src/tools/templates-tools.ts)
 - `DELETE /templates/voicemail/{param}` (src/tools/templates-tools.ts)
 - `DELETE /templates/whatsapp/{param}` (src/tools/templates-tools.ts)
-- `GET /affiliates/campaigns` (src/apps/index.ts)
+- `GET /affiliates/campaigns` (src/tools/affiliates-tools.ts)
 - `GET /affiliates/campaigns/{param}` (src/tools/affiliates-tools.ts)
 - `GET /campaigns/scheduled-messages` (src/tools/campaigns-tools.ts)
 - `GET /campaigns/{param}` (src/tools/campaigns-tools.ts)
 - `GET /campaigns/{param}/recipients` (src/tools/campaigns-tools.ts)
 - `GET /campaigns/{param}/stats` (src/tools/campaigns-tools.ts)
-- `GET /reporting/` (src/apps/index.ts)
 - `GET /reporting/ads` (src/tools/reporting-tools.ts)
 - `GET /reporting/agents` (src/tools/reporting-tools.ts)
 - `GET /reporting/appointments` (src/tools/reporting-tools.ts)
@@ -247,19 +242,17 @@ These are not assumed official. The scanner normalized template expressions to `
 
 ## Needs Manual Review
 
-- `GET /affiliates/` (src/apps/index.ts)
+- `GET /affiliates/` (src/tools/affiliates-tools.ts)
 - `GET /affiliates/payouts` (src/tools/affiliates-tools.ts)
 - `GET /affiliates/referrals` (src/tools/affiliates-tools.ts)
-- `GET /blogs/posts` (src/apps/index.ts)
 - `GET /calendars/groups/slug/validate` (src/clients/ghl-api-client.ts)
 - `GET /companies/` (src/tools/companies-tools.ts)
 - `GET /contacts/smart-lists` (src/tools/smartlists-tools.ts)
-- `GET /contacts/smartlists` (src/apps/index.ts)
-- `GET /courses/` (src/apps/index.ts)
+- `GET /courses` (src/tools/courses-tools.ts)
 - `GET /courses/categories` (src/tools/courses-tools.ts)
 - `GET /courses/courses-exporter` (src/tools/courses-tools.ts)
 - `GET /courses/courses-exporter/products` (src/tools/courses-tools.ts)
-- `GET /funnels/` (src/apps/index.ts)
+- `GET /funnels/` (src/tools/funnels-tools.ts)
 - `GET /locations/` (src/clients/ghl-api-client.ts)
 - `GET /reputation/links` (src/tools/reputation-tools.ts)
 - `GET /reputation/platforms` (src/tools/reputation-tools.ts)

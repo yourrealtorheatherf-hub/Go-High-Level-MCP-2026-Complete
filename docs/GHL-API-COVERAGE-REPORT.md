@@ -1,6 +1,6 @@
 # GHL API Coverage Report
 
-Generated: 2026-05-15T14:30:56.709Z
+Generated: 2026-05-15T17:01:25.251Z
 
 ## Source Snapshot
 
@@ -9,17 +9,17 @@ Generated: 2026-05-15T14:30:56.709Z
 - Docs commit: `192cd68b065a7423c543d82721eb8644cdc883c7`
 - Docs tag/description: `192cd68`
 - Official endpoint references parsed: 576
-- Local endpoint references parsed: 852
-- Local TypeScript files scanned: 95
+- Local endpoint references parsed: 833
+- Local TypeScript files scanned: 58
 
 ## Coverage Summary
 
 - Unique official endpoints: 576
-- Unique local endpoints: 836
+- Unique local endpoints: 829
 - Official endpoints with an exact method/path match locally: 576
 - Exact-match coverage: 100%
 - Likely missing official endpoints: 0
-- Potential local-only/deprecated/private endpoints: 260
+- Potential local-only/deprecated/private endpoints: 253
 
 Exact matching is intentionally conservative. Dynamic path generation, aliases, and compatibility wrappers may create false positives, but this gives us a repeatable first-pass map.
 
@@ -88,7 +88,7 @@ These deserve manual review because they may be legacy, private, renamed, or sim
 - `DELETE /campaigns/scheduled-messages/{param}` — src/tools/campaigns-tools.ts — makeRequest
 - `DELETE /campaigns/{param}` — src/tools/campaigns-tools.ts — makeRequest
 - `DELETE /contacts/{param}/campaigns` — src/clients/ghl-api-client.ts — axiosInstance
-- `GET /affiliates/campaigns` — src/apps/index.ts — makeRequest
+- `GET /affiliates/campaigns` — src/tools/affiliates-tools.ts — makeRequest
 - `GET /affiliates/campaigns/{param}` — src/tools/affiliates-tools.ts — makeRequest
 - `GET /campaigns/scheduled-messages` — src/tools/campaigns-tools.ts — makeRequest
 - `GET /campaigns/{param}` — src/tools/campaigns-tools.ts — makeRequest

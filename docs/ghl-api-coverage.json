@@ -8889,166 +8889,6 @@
   "local": {
     "endpoints": [
       {
-        "key": "GET /phone/calls",
-        "method": "GET",
-        "path": "/phone/calls",
-        "normalizedPath": "/phone/calls",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /phone/numbers",
-        "method": "GET",
-        "path": "/phone/numbers",
-        "normalizedPath": "/phone/numbers",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /courses",
-        "method": "GET",
-        "path": "/courses/",
-        "normalizedPath": "/courses",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /funnels",
-        "method": "GET",
-        "path": "/funnels/",
-        "normalizedPath": "/funnels",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /forms",
-        "method": "GET",
-        "path": "/forms/",
-        "normalizedPath": "/forms",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /blogs/posts",
-        "method": "GET",
-        "path": "/blogs/posts",
-        "normalizedPath": "/blogs/posts",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /blogs/categories",
-        "method": "GET",
-        "path": "/blogs/categories",
-        "normalizedPath": "/blogs/categories",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /blogs/authors",
-        "method": "GET",
-        "path": "/blogs/authors",
-        "normalizedPath": "/blogs/authors",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /affiliates",
-        "method": "GET",
-        "path": "/affiliates/",
-        "normalizedPath": "/affiliates",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /affiliates/campaigns",
-        "method": "GET",
-        "path": "/affiliates/campaigns",
-        "normalizedPath": "/affiliates/campaigns",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /reporting",
-        "method": "GET",
-        "path": "/reporting/",
-        "normalizedPath": "/reporting",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /contacts/smartlists",
-        "method": "GET",
-        "path": "/contacts/smartlists",
-        "normalizedPath": "/contacts/smartlists",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /users",
-        "method": "GET",
-        "path": "/users/",
-        "normalizedPath": "/users",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /voice-ai/agents",
-        "method": "GET",
-        "path": "/voice-ai/agents",
-        "normalizedPath": "/voice-ai/agents",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /voice-ai/calls",
-        "method": "GET",
-        "path": "/voice-ai/calls",
-        "normalizedPath": "/voice-ai/calls",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /proposals",
-        "method": "GET",
-        "path": "/proposals/",
-        "normalizedPath": "/proposals",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /saas-api/public-api/locations",
-        "method": "GET",
-        "path": "/saas-api/public-api/locations",
-        "normalizedPath": "/saas-api/public-api/locations",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /snapshots",
-        "method": "GET",
-        "path": "/snapshots/",
-        "normalizedPath": "/snapshots",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /links",
-        "method": "GET",
-        "path": "/links/",
-        "normalizedPath": "/links",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /triggers",
-        "method": "GET",
-        "path": "/triggers/",
-        "normalizedPath": "/triggers",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
         "key": "POST /contacts",
         "method": "POST",
         "path": "/contacts/",
@@ -15703,14 +15543,22 @@
         "normalizedPath": "/surveys/submissions",
         "sourceFile": "src/tools/official-spec-endpoints.json",
         "caller": "official-spec-generated"
+      },
+      {
+        "key": "GET /users",
+        "method": "GET",
+        "path": "/users/",
+        "normalizedPath": "/users",
+        "sourceFile": "src/tools/official-spec-endpoints.json",
+        "caller": "official-spec-generated"
       }
     ],
-    "filesScanned": 95
+    "filesScanned": 58
   },
   "comparison": {
     "coveredCount": 576,
     "officialUniqueCount": 576,
-    "localUniqueCount": 836,
+    "localUniqueCount": 829,
     "coveragePercent": 100,
     "missingOfficial": [],
     "localOnly": [
@@ -16007,7 +15855,7 @@
         "method": "GET",
         "path": "/affiliates/",
         "normalizedPath": "/affiliates",
-        "sourceFile": "src/apps/index.ts",
+        "sourceFile": "src/tools/affiliates-tools.ts",
         "caller": "makeRequest"
       },
       {
@@ -16015,7 +15863,7 @@
         "method": "GET",
         "path": "/affiliates/campaigns",
         "normalizedPath": "/affiliates/campaigns",
-        "sourceFile": "src/apps/index.ts",
+        "sourceFile": "src/tools/affiliates-tools.ts",
         "caller": "makeRequest"
       },
       {
@@ -16080,14 +15928,6 @@
         "path": "/agent-studio/agents${qs ",
         "normalizedPath": "/agent-studio/agents${qs ",
         "sourceFile": "src/tools/agent-studio-tools.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /blogs/posts",
-        "method": "GET",
-        "path": "/blogs/posts",
-        "normalizedPath": "/blogs/posts",
-        "sourceFile": "src/apps/index.ts",
         "caller": "makeRequest"
       },
       {
@@ -16179,19 +16019,11 @@
         "caller": "makeRequest"
       },
       {
-        "key": "GET /contacts/smartlists",
-        "method": "GET",
-        "path": "/contacts/smartlists",
-        "normalizedPath": "/contacts/smartlists",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
         "key": "GET /courses",
         "method": "GET",
-        "path": "/courses/",
+        "path": "/courses",
         "normalizedPath": "/courses",
-        "sourceFile": "src/apps/index.ts",
+        "sourceFile": "src/tools/courses-tools.ts",
         "caller": "makeRequest"
       },
       {
@@ -16335,7 +16167,7 @@
         "method": "GET",
         "path": "/funnels/",
         "normalizedPath": "/funnels",
-        "sourceFile": "src/apps/index.ts",
+        "sourceFile": "src/tools/funnels-tools.ts",
         "caller": "makeRequest"
       },
       {
@@ -16592,38 +16424,6 @@
         "path": "/phone-system/voicemail${qs ",
         "normalizedPath": "/phone-system/voicemail${qs ",
         "sourceFile": "src/tools/phone-system-tools.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /phone/calls",
-        "method": "GET",
-        "path": "/phone/calls",
-        "normalizedPath": "/phone/calls",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /phone/numbers",
-        "method": "GET",
-        "path": "/phone/numbers",
-        "normalizedPath": "/phone/numbers",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /proposals",
-        "method": "GET",
-        "path": "/proposals/",
-        "normalizedPath": "/proposals",
-        "sourceFile": "src/apps/index.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /reporting",
-        "method": "GET",
-        "path": "/reporting/",
-        "normalizedPath": "/reporting",
-        "sourceFile": "src/apps/index.ts",
         "caller": "makeRequest"
       },
       {
@@ -16927,7 +16727,7 @@
         "method": "GET",
         "path": "/triggers/",
         "normalizedPath": "/triggers",
-        "sourceFile": "src/apps/index.ts",
+        "sourceFile": "src/tools/triggers-tools.ts",
         "caller": "makeRequest"
       },
       {
@@ -16952,14 +16752,6 @@
         "path": "/triggers/{param}/logs",
         "normalizedPath": "/triggers/{}/logs",
         "sourceFile": "src/tools/triggers-tools.ts",
-        "caller": "makeRequest"
-      },
-      {
-        "key": "GET /voice-ai/calls",
-        "method": "GET",
-        "path": "/voice-ai/calls",
-        "normalizedPath": "/voice-ai/calls",
-        "sourceFile": "src/apps/index.ts",
         "caller": "makeRequest"
       },
       {

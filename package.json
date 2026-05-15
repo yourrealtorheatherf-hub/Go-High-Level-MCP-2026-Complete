@@ -1,5 +1,5 @@
 {
-  "name": "@mastanley13/ghl-mcp-server",
+  "name": "go-high-level-mcp-server",
   "version": "1.0.0",
   "description": "GoHighLevel MCP Server v2.1 — 100% official GHL API coverage, generated endpoint tools, daily API drift PRs, Streamable HTTP, MCP SDK 1.26",
   "main": "dist/main.js",
@@ -9,8 +9,6 @@
   "files": [
     "dist/",
     "README.md",
-    "SIGNET.md",
-    "CHANGELOG.md",
     "package.json",
     ".env.example"
   ],
@@ -22,15 +20,13 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "build:dynamic-ui": "cd src/ui/react-app && npm install --prefer-offline && npm run build",
     "build:server": "node scripts/build-server.mjs",
-    "build": "npm run build:dynamic-ui && npm run build:server",
+    "build": "npm run build:server",
     "dev": "nodemon --exec ts-node src/main.ts",
     "start": "node dist/main.js",
     "start:stdio": "node dist/server.js",
     "start:http": "node dist/main.js",
     "start:legacy": "node dist/http-server.js",
-    "vercel-build": "npm run build",
     "prepublishOnly": "npm run build",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -38,8 +34,7 @@
     "lint": "node scripts/build-server.mjs --check",
     "scan:ghl-api": "node scripts/scan-ghl-api-coverage.mjs --refresh && node scripts/generate-official-spec-tools.mjs && node scripts/scan-ghl-api-coverage.mjs && node scripts/classify-local-endpoints.mjs",
     "ci:ghl-api-drift": "npm run scan:ghl-api && git diff -- docs/GHL-API-COVERAGE-REPORT.md docs/GHL-LOCAL-ENDPOINT-CLASSIFICATION.md docs/ghl-api-coverage.json src/tools/official-spec-tools.ts src/tools/official-spec-endpoints.json && test -z \"$(git status --porcelain -- docs/GHL-API-COVERAGE-REPORT.md docs/GHL-LOCAL-ENDPOINT-CLASSIFICATION.md docs/ghl-api-coverage.json src/tools/official-spec-tools.ts src/tools/official-spec-endpoints.json)\"",
-    "smoke:ghl-live": "node scripts/ghl-live-smoke.mjs",
-    "install:ui": "cd src/ui/react-app && npm install"
+    "smoke:ghl-live": "node scripts/ghl-live-smoke.mjs"
   },
   "keywords": [
     "mcp",
@@ -61,12 +56,10 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.72.1",
     "@modelcontextprotocol/sdk": "^1.27.1",
     "axios": "^1.9.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
-    "express": "^5.1.0",
-    "zod": "^4.3.6"
+    "express": "^5.1.0"
   }
 }
