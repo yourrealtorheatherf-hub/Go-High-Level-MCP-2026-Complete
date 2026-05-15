@@ -3,10 +3,10 @@
  * Tools for managing email and SMS campaigns
  */
 
-import { GHLApiClient } from '../clients/ghl-api-client.js';
+import type { GHLToolClient } from './ghl-tool-client.js';
 
 export class CampaignsTools {
-  constructor(private ghlClient: GHLApiClient) {}
+  constructor(private ghlClient: GHLToolClient) {}
 
   getToolDefinitions() {
     return [
@@ -20,7 +20,11 @@ export class CampaignsTools {
             locationId: { type: 'string', description: 'Location ID' },
             status: { type: 'string', enum: ['draft', 'scheduled', 'running', 'completed', 'paused'], description: 'Filter by campaign status' },
             limit: { type: 'number', description: 'Max results' },
-            offset: { type: 'number', description: 'Pagination offset' }
+            offset: { type: 'number', description: 'Pagination offset' },
+            campaignsOnly: { type: 'boolean', description: 'Email Campaign V2 campaignsOnly flag (default: true)' },
+            showStats: { type: 'boolean', description: 'Include Email Campaign V2 stats when available (default: true)' },
+            startAt: { type: 'string', description: 'Optional schedule start filter' },
+            endAt: { type: 'string', description: 'Optional schedule end filter' }
           }
         },
         _meta: {
@@ -264,10 +268,14 @@ export class CampaignsTools {
       case 'get_campaigns': {
         const params = new URLSearchParams();
         params.append('locationId', locationId);
+        params.append('campaignsOnly', String(args.campaignsOnly ?? true));
+        params.append('showStats', String(args.showStats ?? true));
         if (args.status) params.append('status', String(args.status));
         if (args.limit) params.append('limit', String(args.limit));
         if (args.offset) params.append('offset', String(args.offset));
-        return this.ghlClient.makeRequest('GET', `/campaigns/?${params.toString()}`);
+        if (args.startAt) params.append('startAt', String(args.startAt));
+        if (args.endAt) params.append('endAt', String(args.endAt));
+        return this.ghlClient.makeRequest('GET', `/emails/schedule?${params.toString()}`);
       }
       case 'get_campaign': {
         return this.ghlClient.makeRequest('GET', `/campaigns/${args.campaignId}?locationId=${locationId}`);

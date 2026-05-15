@@ -159,15 +159,16 @@ export class EnhancedGHLClient extends GHLApiClient {
   async makeRequest<T = any>(
     method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE',
     path: string,
-    body?: Record<string, unknown>
+    body?: Record<string, unknown>,
+    options?: { version?: string }
   ): Promise<GHLApiResponse<T>> {
     // Cache GET requests
     if (method === 'GET') {
-      const cacheKey = `${method}:${path}`;
+      const cacheKey = `${method}:${options?.version || this.getConfig().version}:${path}`;
       const cached = this.cache.get<GHLApiResponse<T>>(cacheKey);
       if (cached) return cached;
 
-      const result = await this.makeRequestWithRetry<T>(method, path, body);
+      const result = await this.makeRequestWithRetry<T>(method, path, body, options);
       if (result.success) {
         this.cache.set(cacheKey, result);
       }
@@ -175,7 +176,7 @@ export class EnhancedGHLClient extends GHLApiClient {
     }
 
     // Non-GET: execute and invalidate related caches
-    const result = await this.makeRequestWithRetry<T>(method, path, body);
+    const result = await this.makeRequestWithRetry<T>(method, path, body, options);
 
     // Invalidate cache for the resource path
     const basePath = path.split('?')[0].split('/').slice(0, 3).join('/');
@@ -188,6 +189,7 @@ export class EnhancedGHLClient extends GHLApiClient {
     method: string,
     path: string,
     body?: Record<string, unknown>,
+    options?: { version?: string },
     attempt = 0
   ): Promise<GHLApiResponse<T>> {
     const MAX_RETRIES = 3;
@@ -203,7 +205,7 @@ export class EnhancedGHLClient extends GHLApiClient {
       }
 
       // Use parent's makeRequest which has all the proper axios config
-      return await super.makeRequest<T>(method as any, path, body);
+      return await super.makeRequest<T>(method as any, path, body, options);
     } catch (err: any) {
       const status = err.response?.status || (err.message?.match(/\((\d+)\)/)?.[1] && parseInt(err.message.match(/\((\d+)\)/)[1]));
 
@@ -212,7 +214,7 @@ export class EnhancedGHLClient extends GHLApiClient {
         const delay = BASE_DELAY * Math.pow(2, attempt) + Math.random() * 500;
         process.stderr.write(`[GHL] Retry ${attempt + 1}/${MAX_RETRIES} for ${method} ${path} (status ${status}, delay ${Math.round(delay)}ms)\n`);
         await new Promise(r => setTimeout(r, delay));
-        return this.makeRequestWithRetry<T>(method, path, body, attempt + 1);
+        return this.makeRequestWithRetry<T>(method, path, body, options, attempt + 1);
       }
 
       throw err;

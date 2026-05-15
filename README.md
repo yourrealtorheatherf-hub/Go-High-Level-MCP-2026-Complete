@@ -8,11 +8,13 @@
 
 **Original Creator:** [@mastanley13](https://github.com/mastanley13) — Built the foundation for this MCP server.
 
-**Extended by:** [@BusyBee3333](https://github.com/BusyBee3333) — Expanded to 563+ tools covering the entire GHL API.
+**Extended by:** [@BusyBee3333](https://github.com/BusyBee3333) — Expanded to full official GHL API coverage with generated endpoint tools and daily API drift PR automation.
 
 ---
 
 # 🚀 GoHighLevel MCP Server
+
+**Latest update:** The MCP now tracks the official GoHighLevel API docs daily, regenerates coverage artifacts, and opens an update PR whenever GHL changes upstream. Current scan: **576 / 576 official endpoints covered** with **237 generated official endpoint tools**.
 
 ## 💡 What This Unlocks
 

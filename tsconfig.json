@@ -9,8 +9,8 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "outDir": "./dist",
-    "types": ["node", "jest"]
+    "types": ["node"]
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "tests/**/*", "src/ui/**/*", "src/apps/**/*"]
-} 
+  "exclude": ["node_modules", "**/node_modules/**", "dist", "tests/**/*", "src/ui", "src/ui/**", "src/apps", "src/apps/**"]
+}

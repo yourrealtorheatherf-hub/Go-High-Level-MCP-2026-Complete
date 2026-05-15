@@ -3,10 +3,10 @@
  * Tools for managing users and team members
  */
 
-import { GHLApiClient } from '../clients/ghl-api-client.js';
+import type { GHLToolClient } from './ghl-tool-client.js';
 
 export class UsersTools {
-  constructor(private ghlClient: GHLApiClient) {}
+  constructor(private ghlClient: GHLToolClient) {}
 
   getToolDefinitions() {
     return [
@@ -256,12 +256,27 @@ export class UsersTools {
               type: 'string',
               description: 'Email address to search for'
             },
+            emails: {
+              oneOf: [
+                { type: 'array', items: { type: 'string' } },
+                { type: 'string' }
+              ],
+              description: 'One or more email addresses. Comma-separated strings are accepted.'
+            },
+            companyId: {
+              type: 'string',
+              description: 'Company ID for the official user email filter endpoint'
+            },
+            deleted: {
+              type: 'boolean',
+              description: 'Whether to include deleted users'
+            },
             locationId: {
               type: 'string',
               description: 'Location ID to filter within (uses default if not provided)'
             }
           },
-          required: ['email']
+          required: []
         },
         _meta: {
           labels: {
@@ -282,15 +297,22 @@ export class UsersTools {
       case 'get_users': {
         const params = new URLSearchParams();
         params.append('locationId', locationId);
+        if (args.companyId) params.append('companyId', String(args.companyId));
+        if (args.query) params.append('query', String(args.query));
         if (args.skip) params.append('skip', String(args.skip));
         if (args.limit) params.append('limit', String(args.limit));
         if (args.type) params.append('type', String(args.type));
         if (args.role) params.append('role', String(args.role));
-        if (args.ids) params.append('ids', String(args.ids));
+        if (Array.isArray(args.ids)) {
+          for (const id of args.ids) params.append('ids', String(id));
+        } else if (args.ids) {
+          params.append('ids', String(args.ids));
+        }
         if (args.sort) params.append('sort', String(args.sort));
         if (args.sortDirection) params.append('sortDirection', String(args.sortDirection));
+        if (args.enabled2waySync !== undefined) params.append('enabled2waySync', String(args.enabled2waySync));
         
-        return this.ghlClient.makeRequest('GET', `/users/?${params.toString()}`);
+        return this.ghlClient.makeRequest('GET', `/users/search?${params.toString()}`);
       }
 
       case 'get_user': {
@@ -345,10 +367,19 @@ export class UsersTools {
       }
 
       case 'filter_users_by_email': {
+        const emails = Array.isArray(args.emails)
+          ? args.emails.map(String)
+          : args.emails
+            ? String(args.emails).split(',').map((item) => item.trim()).filter(Boolean)
+            : args.email
+              ? [String(args.email)]
+              : [];
         const body: Record<string, unknown> = {
-          email: args.email,
-          locationId
+          companyId: args.companyId,
+          deleted: args.deleted ?? false,
+          emails
         };
+        if (!body.companyId) body.locationId = locationId;
         return this.ghlClient.makeRequest('POST', `/users/search/filter-by-email`, body);
       }
 

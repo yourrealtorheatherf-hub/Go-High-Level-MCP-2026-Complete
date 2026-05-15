@@ -1,0 +1,7289 @@
+[
+  {
+    "name": "official_ad_manager_fb_get_reporting",
+    "method": "GET",
+    "path": "/ad-publishing/facebook/reporting",
+    "app": "ad-manager",
+    "summary": "Get reporting data",
+    "operationId": "fb-get-reporting",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "groupBy",
+        "required": true,
+        "schema": {
+          "enum": [
+            "day",
+            "week",
+            "month"
+          ],
+          "type": "string"
+        },
+        "description": "Time grouping interval"
+      },
+      {
+        "name": "startDate",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Report start date"
+      },
+      {
+        "name": "endDate",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Report end date"
+      },
+      {
+        "name": "type",
+        "required": true,
+        "schema": {
+          "enum": [
+            "AD_MANAGER",
+            "INTEGRATION"
+          ],
+          "type": "string"
+        },
+        "description": "Integration source type"
+      },
+      {
+        "name": "fields",
+        "required": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "impressions",
+              "clicks",
+              "spend",
+              "cpc",
+              "cost_per_conversion",
+              "conversions",
+              "cpm",
+              "reach",
+              "frequency"
+            ]
+          }
+        },
+        "description": "Comma-separated reporting fields"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_fb_get_campaign_reporting",
+    "method": "GET",
+    "path": "/ad-publishing/facebook/reporting/campaign/{campaignId}",
+    "app": "ad-manager",
+    "summary": "Get campaign reporting",
+    "operationId": "fb-get-campaign-reporting",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [
+      "campaignId"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "startDate",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Report start date"
+      },
+      {
+        "name": "endDate",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Report end date"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_fb_get_reporting_list",
+    "method": "GET",
+    "path": "/ad-publishing/facebook/reporting/list",
+    "app": "ad-manager",
+    "summary": "Get reporting list",
+    "operationId": "fb-get-reporting-list",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "listType",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Reporting list type"
+      },
+      {
+        "name": "startDate",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Report start date"
+      },
+      {
+        "name": "endDate",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Report end date"
+      },
+      {
+        "name": "campaignId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Campaign identifier"
+      },
+      {
+        "name": "type",
+        "required": true,
+        "schema": {
+          "enum": [
+            "AD_MANAGER",
+            "INTEGRATION"
+          ],
+          "type": "string"
+        },
+        "description": "Integration source type"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_fb_get_current_user",
+    "method": "GET",
+    "path": "/ad-publishing/facebook/me",
+    "app": "ad-manager",
+    "summary": "Get current Facebook user",
+    "operationId": "fb-get-current-user",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_fb_get_pages",
+    "method": "GET",
+    "path": "/ad-publishing/facebook/pages",
+    "app": "ad-manager",
+    "summary": "Get Facebook pages",
+    "operationId": "fb-get-pages",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "fetchExisting",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Fetch existing pages flag"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_fb_get_instagram_accounts",
+    "method": "GET",
+    "path": "/ad-publishing/facebook/page/{pageId}/instagram",
+    "app": "ad-manager",
+    "summary": "Get Instagram accounts for page",
+    "operationId": "fb-get-instagram-accounts",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [
+      "pageId"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "type",
+        "required": false,
+        "schema": {
+          "enum": [
+            "INTEGRATION",
+            "AD_MANAGER"
+          ],
+          "type": "string"
+        },
+        "description": "Integration type"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_fb_get_page_lead_forms",
+    "method": "GET",
+    "path": "/ad-publishing/facebook/page/{pageId}/forms",
+    "app": "ad-manager",
+    "summary": "Get page lead forms",
+    "operationId": "fb-get-page-lead-forms",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [
+      "pageId"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_fb_create_page_lead_form",
+    "method": "POST",
+    "path": "/ad-publishing/facebook/page/{pageId}/forms",
+    "app": "ad-manager",
+    "summary": "Create page lead form",
+    "operationId": "fb-create-page-lead-form",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "pageId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/CreateLeadFormDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_get_ad_accounts",
+    "method": "GET",
+    "path": "/ad-publishing/facebook/ad-accounts",
+    "app": "ad-manager",
+    "summary": "Get ad accounts",
+    "operationId": "fb-get-ad-accounts",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "type",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Account source type"
+      },
+      {
+        "name": "next",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Pagination cursor"
+      },
+      {
+        "name": "fetchAll",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Fetch all accounts"
+      },
+      {
+        "name": "limit",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Results page limit"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_fb_get_ad_account",
+    "method": "GET",
+    "path": "/ad-publishing/facebook/ad-accounts/{adAccountId}",
+    "app": "ad-manager",
+    "summary": "Get ad account details",
+    "operationId": "fb-get-ad-account",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [
+      "adAccountId"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_fb_delete_ad_account",
+    "method": "DELETE",
+    "path": "/ad-publishing/facebook/ad-accounts/{adAccountId}",
+    "app": "ad-manager",
+    "summary": "Delete ad account",
+    "operationId": "fb-delete-ad-account",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "adAccountId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/LocationIdBodyDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_get_conversation_forms",
+    "method": "GET",
+    "path": "/ad-publishing/facebook/conversation-forms",
+    "app": "ad-manager",
+    "summary": "Get conversation forms",
+    "operationId": "fb-get-conversation-forms",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_fb_create_conversation_form",
+    "method": "POST",
+    "path": "/ad-publishing/facebook/conversation-forms",
+    "app": "ad-manager",
+    "summary": "Create conversation form",
+    "operationId": "fb-create-conversation-form",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/CreateConversationFormDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_create_integration",
+    "method": "POST",
+    "path": "/ad-publishing/facebook/integration",
+    "app": "ad-manager",
+    "summary": "Create Facebook integration",
+    "operationId": "fb-create-integration",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/CreateIntegrationDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_get_integration",
+    "method": "GET",
+    "path": "/ad-publishing/facebook/integration",
+    "app": "ad-manager",
+    "summary": "Get Facebook integration",
+    "operationId": "fb-get-integration",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_fb_delete_integration",
+    "method": "DELETE",
+    "path": "/ad-publishing/facebook/integration",
+    "app": "ad-manager",
+    "summary": "Delete Facebook integration",
+    "operationId": "fb-delete-integration",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/LocationIdBodyDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_search_targeting",
+    "method": "GET",
+    "path": "/ad-publishing/facebook/targeting/search",
+    "app": "ad-manager",
+    "summary": "Search targeting options",
+    "operationId": "fb-search-targeting",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Targeting search type"
+      },
+      {
+        "name": "query",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Search query string"
+      },
+      {
+        "name": "searchType",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Specific search subtype"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_fb_publish_campaign",
+    "method": "POST",
+    "path": "/ad-publishing/facebook/campaigns/{campaignId}/publish",
+    "app": "ad-manager",
+    "summary": "Publish campaign",
+    "operationId": "fb-publish-campaign",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "campaignId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/PublishAdDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_delete_page",
+    "method": "DELETE",
+    "path": "/ad-publishing/facebook/page",
+    "app": "ad-manager",
+    "summary": "Delete page connection",
+    "operationId": "fb-delete-page",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "pageId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Facebook page ID"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_fb_get_pixels",
+    "method": "GET",
+    "path": "/ad-publishing/facebook/pixels",
+    "app": "ad-manager",
+    "summary": "Get conversion pixels",
+    "operationId": "fb-get-pixels",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "channel",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Channel type"
+      },
+      {
+        "name": "pageId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Facebook page ID"
+      },
+      {
+        "name": "igUserId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Instagram user ID"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_fb_upsert_pixel",
+    "method": "PUT",
+    "path": "/ad-publishing/facebook/pixels",
+    "app": "ad-manager",
+    "summary": "Upsert conversion pixel",
+    "operationId": "fb-upsert-pixel",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpsertConversionPixelDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_get_custom_audiences",
+    "method": "GET",
+    "path": "/ad-publishing/facebook/custom-audience",
+    "app": "ad-manager",
+    "summary": "Get custom audiences",
+    "operationId": "fb-get-custom-audiences",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "type",
+        "required": true,
+        "schema": {
+          "enum": [
+            "lookalike",
+            "custom",
+            "all"
+          ],
+          "type": "string"
+        },
+        "description": "Audience list type"
+      },
+      {
+        "name": "source",
+        "required": false,
+        "schema": {
+          "enum": [
+            "ad_manager",
+            "integration"
+          ],
+          "type": "string"
+        },
+        "description": "Audience data source"
+      },
+      {
+        "name": "adAccountId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Ad account identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_fb_delete_custom_audience",
+    "method": "DELETE",
+    "path": "/ad-publishing/facebook/custom-audience/{audienceId}",
+    "app": "ad-manager",
+    "summary": "Delete custom audience",
+    "operationId": "fb-delete-custom-audience",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "audienceId"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_fb_update_custom_audience",
+    "method": "PUT",
+    "path": "/ad-publishing/facebook/custom-audience/{audienceId}",
+    "app": "ad-manager",
+    "summary": "Update custom audience",
+    "operationId": "fb-update-custom-audience",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "audienceId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/FbUpdateAudienceBodyDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_get_custom_audience_by_id",
+    "method": "GET",
+    "path": "/ad-publishing/facebook/custom-audience/{audienceId}",
+    "app": "ad-manager",
+    "summary": "Get custom audience by ID",
+    "operationId": "fb-get-custom-audience-by-id",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [
+      "audienceId"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_fb_add_custom_audience_member",
+    "method": "PUT",
+    "path": "/ad-publishing/facebook/custom-audience/{audienceId}/member",
+    "app": "ad-manager",
+    "summary": "Add custom audience member",
+    "operationId": "fb-add-custom-audience-member",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "audienceId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpdateCustomAudienceDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_remove_custom_audience_member",
+    "method": "DELETE",
+    "path": "/ad-publishing/facebook/custom-audience/{audienceId}/member",
+    "app": "ad-manager",
+    "summary": "Remove custom audience member",
+    "operationId": "fb-remove-custom-audience-member",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "audienceId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpdateCustomAudienceDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_batch_update_audience_members",
+    "method": "PUT",
+    "path": "/ad-publishing/facebook/custom-audience/{audienceId}/member/batch",
+    "app": "ad-manager",
+    "summary": "Batch update audience members",
+    "operationId": "fb-batch-update-audience-members",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "audienceId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpdateCustomAudienceBatchDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_set_default_page",
+    "method": "PUT",
+    "path": "/ad-publishing/facebook/page/default",
+    "app": "ad-manager",
+    "summary": "Set default page",
+    "operationId": "fb-set-default-page",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/FbSetDefaultPageBodyDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_get_lead_form",
+    "method": "GET",
+    "path": "/ad-publishing/facebook/lead-form/{leadFormId}",
+    "app": "ad-manager",
+    "summary": "Get lead form by ID",
+    "operationId": "fb-get-lead-form",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [
+      "leadFormId"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_fb_get_campaign",
+    "method": "GET",
+    "path": "/ad-publishing/facebook/campaign/{campaignId}",
+    "app": "ad-manager",
+    "summary": "Get campaign with linked entities",
+    "operationId": "fb-get-campaign",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [
+      "campaignId"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "fields",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Comma-separated field names"
+      },
+      {
+        "name": "source",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Campaign data source"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_fb_get_entity",
+    "method": "GET",
+    "path": "/ad-publishing/facebook/entity",
+    "app": "ad-manager",
+    "summary": "Get entities",
+    "operationId": "fb-get-entity",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "type",
+        "required": true,
+        "schema": {
+          "enum": [
+            "AD_MANAGER",
+            "INTEGRATION"
+          ],
+          "type": "string"
+        },
+        "description": "Integration source type"
+      },
+      {
+        "name": "next",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Pagination cursor"
+      },
+      {
+        "name": "fetchAll",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Fetch all entities"
+      },
+      {
+        "name": "campaignId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Campaign identifier"
+      },
+      {
+        "name": "adSetId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Ad set identifier"
+      },
+      {
+        "name": "entityType",
+        "required": true,
+        "schema": {
+          "enum": [
+            "CAMPAIGN",
+            "ADSET",
+            "AD"
+          ],
+          "type": "string"
+        },
+        "description": "Entity type to fetch"
+      },
+      {
+        "name": "searchId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Search identifier"
+      },
+      {
+        "name": "selectedAdAccountId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Selected ad account ID"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_fb_upsert_campaign",
+    "method": "PUT",
+    "path": "/ad-publishing/facebook/campaigns",
+    "app": "ad-manager",
+    "summary": "Upsert campaign",
+    "operationId": "fb-upsert-campaign",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpsertCampaignDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_upsert_adset",
+    "method": "PUT",
+    "path": "/ad-publishing/facebook/adsets",
+    "app": "ad-manager",
+    "summary": "Upsert adset",
+    "operationId": "fb-upsert-adset",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpsertAdsetDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_upsert_ad",
+    "method": "PUT",
+    "path": "/ad-publishing/facebook/ads-v2",
+    "app": "ad-manager",
+    "summary": "Upsert ad",
+    "operationId": "fb-upsert-ad",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpsertAdDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_pause_campaign",
+    "method": "POST",
+    "path": "/ad-publishing/facebook/campaigns/{campaignId}/pause",
+    "app": "ad-manager",
+    "summary": "Pause campaign",
+    "operationId": "fb-pause-campaign",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "campaignId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/LocationIdBodyDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_resume_campaign",
+    "method": "POST",
+    "path": "/ad-publishing/facebook/campaigns/{campaignId}/resume",
+    "app": "ad-manager",
+    "summary": "Resume campaign",
+    "operationId": "fb-resume-campaign",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "campaignId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/LocationIdBodyDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_duplicate_campaign",
+    "method": "POST",
+    "path": "/ad-publishing/facebook/campaigns/{campaignId}/duplicate",
+    "app": "ad-manager",
+    "summary": "Duplicate campaign",
+    "operationId": "fb-duplicate-campaign",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "campaignId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/LocationIdBodyDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_delete_campaign",
+    "method": "DELETE",
+    "path": "/ad-publishing/facebook/campaigns/{campaignId}",
+    "app": "ad-manager",
+    "summary": "Delete campaign",
+    "operationId": "fb-delete-campaign",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "campaignId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/LocationIdBodyDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_pause_adset",
+    "method": "POST",
+    "path": "/ad-publishing/facebook/adsets/{adsetId}/pause",
+    "app": "ad-manager",
+    "summary": "Pause ad set",
+    "operationId": "fb-pause-adset",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "adsetId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/LocationIdBodyDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_resume_adset",
+    "method": "POST",
+    "path": "/ad-publishing/facebook/adsets/{adsetId}/resume",
+    "app": "ad-manager",
+    "summary": "Resume ad set",
+    "operationId": "fb-resume-adset",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "adsetId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/LocationIdBodyDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_duplicate_adset",
+    "method": "POST",
+    "path": "/ad-publishing/facebook/adsets/{adsetId}/duplicate",
+    "app": "ad-manager",
+    "summary": "Duplicate ad set",
+    "operationId": "fb-duplicate-adset",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "adsetId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_ad_manager_fb_delete_adset",
+    "method": "DELETE",
+    "path": "/ad-publishing/facebook/adsets/{adsetId}",
+    "app": "ad-manager",
+    "summary": "Delete ad set",
+    "operationId": "fb-delete-adset",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "adsetId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/LocationIdBodyDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_pause_ad",
+    "method": "POST",
+    "path": "/ad-publishing/facebook/ads/{adId}/pause",
+    "app": "ad-manager",
+    "summary": "Pause ad",
+    "operationId": "fb-pause-ad",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "adId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/LocationIdBodyDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_resume_ad",
+    "method": "POST",
+    "path": "/ad-publishing/facebook/ads/{adId}/resume",
+    "app": "ad-manager",
+    "summary": "Resume ad",
+    "operationId": "fb-resume-ad",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "adId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/LocationIdBodyDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_fb_duplicate_ad",
+    "method": "POST",
+    "path": "/ad-publishing/facebook/ads/{adId}/duplicate",
+    "app": "ad-manager",
+    "summary": "Duplicate ad",
+    "operationId": "fb-duplicate-ad",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "adId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_ad_manager_fb_delete_ad",
+    "method": "DELETE",
+    "path": "/ad-publishing/facebook/ads/{adId}",
+    "app": "ad-manager",
+    "summary": "Delete ad",
+    "operationId": "fb-delete-ad",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "adId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/LocationIdBodyDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_google_get_reporting",
+    "method": "GET",
+    "path": "/ad-publishing/google/reporting",
+    "app": "ad-manager",
+    "summary": "Get reporting data",
+    "operationId": "google-get-reporting",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "groupBy",
+        "required": false,
+        "schema": {
+          "enum": [
+            "date",
+            "week",
+            "month"
+          ],
+          "type": "string"
+        },
+        "description": "Group by period"
+      },
+      {
+        "name": "startDate",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Report start date"
+      },
+      {
+        "name": "endDate",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Report end date"
+      },
+      {
+        "name": "type",
+        "required": true,
+        "schema": {
+          "enum": [
+            "AD_MANAGER",
+            "INTEGRATION"
+          ],
+          "type": "string"
+        },
+        "description": "Integration type"
+      },
+      {
+        "name": "fields",
+        "required": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "impressions",
+              "clicks",
+              "cost_micros",
+              "average_cpc",
+              "conversions",
+              "average_cpm",
+              "cost_per_conversion",
+              "ctr"
+            ]
+          }
+        },
+        "description": "Comma-separated reporting fields"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_google_get_reporting_list",
+    "method": "GET",
+    "path": "/ad-publishing/google/reporting/list",
+    "app": "ad-manager",
+    "summary": "Get reporting list",
+    "operationId": "google-get-reporting-list",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "listType",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Report list type"
+      },
+      {
+        "name": "startDate",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Report start date"
+      },
+      {
+        "name": "endDate",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Report end date"
+      },
+      {
+        "name": "campaignId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Campaign identifier"
+      },
+      {
+        "name": "type",
+        "required": true,
+        "schema": {
+          "enum": [
+            "AD_MANAGER",
+            "INTEGRATION"
+          ],
+          "type": "string"
+        },
+        "description": "Integration type"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_google_get_campaign_reporting",
+    "method": "GET",
+    "path": "/ad-publishing/google/reporting/campaign/{campaignId}",
+    "app": "ad-manager",
+    "summary": "Get campaign reporting",
+    "operationId": "google-get-campaign-reporting",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [
+      "campaignId"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "startDate",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Report start date"
+      },
+      {
+        "name": "endDate",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Report end date"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_google_get_conversions",
+    "method": "GET",
+    "path": "/ad-publishing/google/conversions",
+    "app": "ad-manager",
+    "summary": "Get conversions",
+    "operationId": "google-get-conversions",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "type",
+        "required": false,
+        "schema": {
+          "enum": [
+            "AD_MANAGER",
+            "AD_WORDS"
+          ],
+          "type": "string"
+        },
+        "description": "Integration type"
+      },
+      {
+        "name": "conversionType",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Conversion type"
+      },
+      {
+        "name": "category",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Conversion category"
+      },
+      {
+        "name": "startDate",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Filter start date"
+      },
+      {
+        "name": "endDate",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Filter end date"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_google_upsert_conversion",
+    "method": "PUT",
+    "path": "/ad-publishing/google/conversions",
+    "app": "ad-manager",
+    "summary": "Upsert conversion",
+    "operationId": "google-upsert-conversion",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpsertConversionDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_google_get_conversion_by_id",
+    "method": "GET",
+    "path": "/ad-publishing/google/conversions/{conversionId}",
+    "app": "ad-manager",
+    "summary": "Get conversion by ID",
+    "operationId": "google-get-conversion-by-id",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [
+      "conversionId"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_google_delete_conversion",
+    "method": "DELETE",
+    "path": "/ad-publishing/google/conversions/{conversionId}",
+    "app": "ad-manager",
+    "summary": "Delete conversion",
+    "operationId": "google-delete-conversion",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "conversionId"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_google_get_integration",
+    "method": "GET",
+    "path": "/ad-publishing/google/integration",
+    "app": "ad-manager",
+    "summary": "Get Google integration",
+    "operationId": "google-get-integration",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_google_create_integration",
+    "method": "POST",
+    "path": "/ad-publishing/google/integration",
+    "app": "ad-manager",
+    "summary": "Create Google integration",
+    "operationId": "google-create-integration",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/CreateGoogleIntegrationDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_google_get_current_user",
+    "method": "GET",
+    "path": "/ad-publishing/google/me",
+    "app": "ad-manager",
+    "summary": "Get current Google user",
+    "operationId": "google-get-current-user",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_google_get_ad_accounts",
+    "method": "GET",
+    "path": "/ad-publishing/google/ad-accounts",
+    "app": "ad-manager",
+    "summary": "Get Google ad accounts",
+    "operationId": "google-get-ad-accounts",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "type",
+        "required": false,
+        "schema": {
+          "enum": [
+            "INTEGRATION",
+            "AD_MANAGER"
+          ],
+          "type": "string"
+        },
+        "description": "Account type"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_google_get_ad_account_details",
+    "method": "GET",
+    "path": "/ad-publishing/google/ad-accounts/{adAccountId}",
+    "app": "ad-manager",
+    "summary": "Get ad account details",
+    "operationId": "google-get-ad-account-details",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [
+      "adAccountId"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_google_delete_ad_account",
+    "method": "DELETE",
+    "path": "/ad-publishing/google/ad-accounts/{adAccountId}",
+    "app": "ad-manager",
+    "summary": "Delete ad account",
+    "operationId": "google-delete-ad-account",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "adAccountId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/LocationIdBodyDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_google_publish_ad",
+    "method": "POST",
+    "path": "/ad-publishing/google/ads/{adId}/publish",
+    "app": "ad-manager",
+    "summary": "Publish ad",
+    "operationId": "google-publish-ad",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "adId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_ad_manager_google_search_targeting",
+    "method": "GET",
+    "path": "/ad-publishing/google/targeting/search",
+    "app": "ad-manager",
+    "summary": "Search targeting options",
+    "operationId": "google-search-targeting",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Search type"
+      },
+      {
+        "name": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Search query"
+      },
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_google_get_keyword_ideas",
+    "method": "POST",
+    "path": "/ad-publishing/google/keyword-ideas",
+    "app": "ad-manager",
+    "summary": "Get keyword ideas",
+    "operationId": "google-get-keyword-ideas",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/KeywordSuggestionDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_google_get_assets",
+    "method": "GET",
+    "path": "/ad-publishing/google/assets",
+    "app": "ad-manager",
+    "summary": "Get assets",
+    "operationId": "google-get-assets",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "type",
+        "required": true,
+        "schema": {
+          "enum": [
+            "CALL",
+            "SITELINK",
+            "LEAD_FORM",
+            "IMAGE",
+            "TEXT"
+          ],
+          "type": "string"
+        },
+        "description": "Asset type to retrieve"
+      },
+      {
+        "name": "id",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Asset identifier"
+      },
+      {
+        "name": "advertiserOnly",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Advertiser only flag"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_google_upsert_assets",
+    "method": "POST",
+    "path": "/ad-publishing/google/assets",
+    "app": "ad-manager",
+    "summary": "Upsert assets",
+    "operationId": "google-upsert-assets",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpsertAssetsDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_google_get_entity",
+    "method": "GET",
+    "path": "/ad-publishing/google/entity",
+    "app": "ad-manager",
+    "summary": "Get entities",
+    "operationId": "google-get-entity",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "type",
+        "required": true,
+        "schema": {
+          "enum": [
+            "AD_MANAGER",
+            "INTEGRATION"
+          ],
+          "type": "string"
+        },
+        "description": "Integration type"
+      },
+      {
+        "name": "campaignId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Campaign identifier"
+      },
+      {
+        "name": "adGroupId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Ad group identifier"
+      },
+      {
+        "name": "entityType",
+        "required": true,
+        "schema": {
+          "enum": [
+            "CAMPAIGN",
+            "ADGROUP",
+            "AD"
+          ],
+          "type": "string"
+        },
+        "description": "Entity type"
+      },
+      {
+        "name": "searchId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Search identifier"
+      },
+      {
+        "name": "startDate",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Filter start date"
+      },
+      {
+        "name": "endDate",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Filter end date"
+      },
+      {
+        "name": "selectedAdAccountId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Selected ad account ID"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_google_get_target_interests",
+    "method": "GET",
+    "path": "/ad-publishing/google/target-interests",
+    "app": "ad-manager",
+    "summary": "Get target interests",
+    "operationId": "google-get-target-interests",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "type",
+        "required": true,
+        "schema": {
+          "enum": [
+            "AFFINITY",
+            "IN_MARKET"
+          ],
+          "type": "string"
+        },
+        "description": "Interest type"
+      },
+      {
+        "name": "advertisingChannelType",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Channel type"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_google_get_segments",
+    "method": "GET",
+    "path": "/ad-publishing/google/segments",
+    "app": "ad-manager",
+    "summary": "Get segments",
+    "operationId": "google-get-segments",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "type",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Segment type"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_google_upsert_segment",
+    "method": "PUT",
+    "path": "/ad-publishing/google/segments",
+    "app": "ad-manager",
+    "summary": "Upsert segment",
+    "operationId": "google-upsert-segment",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "type",
+        "required": true,
+        "schema": {
+          "enum": [
+            "CUSTOM_SEGMENTS",
+            "WEBSITE_VISITOR",
+            "CUSTOMER_MATCH",
+            "LOOKALIKE"
+          ],
+          "type": "string"
+        },
+        "description": "Segment type"
+      }
+    ],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpsertSegmentDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_google_delete_segment",
+    "method": "DELETE",
+    "path": "/ad-publishing/google/segments/{segmentId}",
+    "app": "ad-manager",
+    "summary": "Delete segment",
+    "operationId": "google-delete-segment",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "segmentId"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "type",
+        "required": true,
+        "schema": {
+          "enum": [
+            "CUSTOM_SEGMENTS",
+            "DATA_SEGMENTS"
+          ],
+          "type": "string"
+        },
+        "description": "Segment type"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_google_get_segment_by_id",
+    "method": "GET",
+    "path": "/ad-publishing/google/segments/{segmentId}",
+    "app": "ad-manager",
+    "summary": "Get segment by ID",
+    "operationId": "google-get-segment-by-id",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [
+      "segmentId"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "type",
+        "required": true,
+        "schema": {
+          "enum": [
+            "CUSTOM_SEGMENTS",
+            "DATA_SEGMENTS"
+          ],
+          "type": "string"
+        },
+        "description": "Segment type"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_google_create_offline_user_list_job",
+    "method": "POST",
+    "path": "/ad-publishing/google/segments/offline-user-list-job",
+    "app": "ad-manager",
+    "summary": "Create offline user list job",
+    "operationId": "google-create-offline-user-list-job",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/CreateOfflineUserListJobDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_google_upsert_audience",
+    "method": "PUT",
+    "path": "/ad-publishing/google/audiences",
+    "app": "ad-manager",
+    "summary": "Upsert audience",
+    "operationId": "google-upsert-audience",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpsertAudienceDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_google_get_audiences",
+    "method": "GET",
+    "path": "/ad-publishing/google/audiences",
+    "app": "ad-manager",
+    "summary": "Get audiences",
+    "operationId": "google-get-audiences",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_google_get_audience_by_id",
+    "method": "GET",
+    "path": "/ad-publishing/google/audiences/{audienceId}",
+    "app": "ad-manager",
+    "summary": "Get audience by ID",
+    "operationId": "google-get-audience-by-id",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [
+      "audienceId"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_google_upsert_campaign",
+    "method": "PUT",
+    "path": "/ad-publishing/google/ads",
+    "app": "ad-manager",
+    "summary": "Upsert Google campaign",
+    "operationId": "google-upsert-campaign",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/CampaignDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_google_get_campaign_by_id",
+    "method": "GET",
+    "path": "/ad-publishing/google/ads/{adId}",
+    "app": "ad-manager",
+    "summary": "Get Google campaign by ID",
+    "operationId": "google-get-campaign-by-id",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [
+      "adId"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_google_get_conversion_goals",
+    "method": "GET",
+    "path": "/ad-publishing/google/conversion-goals",
+    "app": "ad-manager",
+    "summary": "Get conversion goals",
+    "operationId": "google-get-conversion-goals",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_li_get_integration",
+    "method": "GET",
+    "path": "/ad-publishing/linkedin/integration",
+    "app": "ad-manager",
+    "summary": "Get LinkedIn integration",
+    "operationId": "li-get-integration",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_li_create_integration",
+    "method": "POST",
+    "path": "/ad-publishing/linkedin/integration",
+    "app": "ad-manager",
+    "summary": "Create LinkedIn integration",
+    "operationId": "li-create-integration",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/CreateLinkedinIntegrationDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_li_get_ad_accounts",
+    "method": "GET",
+    "path": "/ad-publishing/linkedin/ad-accounts",
+    "app": "ad-manager",
+    "summary": "Get LinkedIn ad accounts",
+    "operationId": "li-get-ad-accounts",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_li_get_ad_account_details",
+    "method": "GET",
+    "path": "/ad-publishing/linkedin/ad-account",
+    "app": "ad-manager",
+    "summary": "Get ad account details",
+    "operationId": "li-get-ad-account-details",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "adAccountId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Ad account identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_li_delete_ad_account",
+    "method": "DELETE",
+    "path": "/ad-publishing/linkedin/ad-account",
+    "app": "ad-manager",
+    "summary": "Delete ad account",
+    "operationId": "li-delete-ad-account",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "adAccountId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Ad account identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_li_get_current_user",
+    "method": "GET",
+    "path": "/ad-publishing/linkedin/me",
+    "app": "ad-manager",
+    "summary": "Get current LinkedIn user",
+    "operationId": "li-get-current-user",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_li_get_campaign_group",
+    "method": "GET",
+    "path": "/ad-publishing/linkedin/ads/{adId}",
+    "app": "ad-manager",
+    "summary": "Get ad campaign group",
+    "operationId": "li-get-campaign-group",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [
+      "adId"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_li_publish_campaign_group",
+    "method": "POST",
+    "path": "/ad-publishing/linkedin/ads/{adId}/publish",
+    "app": "ad-manager",
+    "summary": "Publish ad campaign group",
+    "operationId": "li-publish-campaign-group",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "adId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/LocationIdBodyDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_li_upsert_campaign_group",
+    "method": "PUT",
+    "path": "/ad-publishing/linkedin/ads",
+    "app": "ad-manager",
+    "summary": "Upsert ad campaign group",
+    "operationId": "li-upsert-campaign-group",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/AdCampaignGroupDataDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_li_search_targeting",
+    "method": "GET",
+    "path": "/ad-publishing/linkedin/targeting/search",
+    "app": "ad-manager",
+    "summary": "Search targeting options",
+    "operationId": "li-search-targeting",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      },
+      {
+        "name": "facet",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Targeting facet"
+      },
+      {
+        "name": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Search query"
+      },
+      {
+        "name": "q",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Query parameter"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_li_get_lead_forms",
+    "method": "GET",
+    "path": "/ad-publishing/linkedin/{accountId}/forms",
+    "app": "ad-manager",
+    "summary": "Get lead forms",
+    "operationId": "li-get-lead-forms",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [
+      "accountId"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_li_create_lead_form",
+    "method": "POST",
+    "path": "/ad-publishing/linkedin/{accountId}/form",
+    "app": "ad-manager",
+    "summary": "Create lead form",
+    "operationId": "li-create-lead-form",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "accountId"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/LinkedInCreateLeadFormBodyDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_li_update_ad_status",
+    "method": "PATCH",
+    "path": "/ad-publishing/linkedin/{adId}/status",
+    "app": "ad-manager",
+    "summary": "Update ad status",
+    "operationId": "li-update-ad-status",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.write"
+    ],
+    "pathParams": [
+      "adId"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location identifier"
+      }
+    ],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/LinkedInUpdateAdStatusBodyDTO"
+    }
+  },
+  {
+    "name": "official_ad_manager_li_get_ad_analytics",
+    "method": "GET",
+    "path": "/ad-publishing/linkedin/reporting",
+    "app": "ad-manager",
+    "summary": "Get ad analytics",
+    "operationId": "li-get-ad-analytics",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location ID"
+      },
+      {
+        "name": "pivot",
+        "required": false,
+        "schema": {
+          "default": "ACCOUNT",
+          "enum": [
+            "ACCOUNT",
+            "CAMPAIGN",
+            "CAMPAIGN_GROUP",
+            "CREATIVE"
+          ],
+          "type": "string"
+        },
+        "description": "Analytics pivot type"
+      },
+      {
+        "name": "groupBy",
+        "required": false,
+        "schema": {
+          "default": "day",
+          "enum": [
+            "day",
+            "month",
+            "year"
+          ],
+          "type": "string"
+        },
+        "description": "Time granularity for analytics"
+      },
+      {
+        "name": "startDate",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Start date in yyyy-mm-dd format"
+      },
+      {
+        "name": "endDate",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "End date in yyyy-mm-dd format"
+      },
+      {
+        "name": "entityUrns",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Comma-separated list of entity URNs"
+      },
+      {
+        "name": "fields",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": "Comma-separated list of fields to retrieve"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_li_get_reporting_list",
+    "method": "GET",
+    "path": "/ad-publishing/linkedin/reporting/list",
+    "app": "ad-manager",
+    "summary": "Get reporting list",
+    "operationId": "li-get-reporting-list",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location ID"
+      },
+      {
+        "name": "listType",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "List type"
+      },
+      {
+        "name": "campaignId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Campaign ID"
+      },
+      {
+        "name": "campaignGroupId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Campaign group ID"
+      },
+      {
+        "name": "startDate",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Start date in yyyy-mm-dd format"
+      },
+      {
+        "name": "endDate",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "End date in yyyy-mm-dd format"
+      },
+      {
+        "name": "fields",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": "Comma-separated list of fields to retrieve"
+      }
+    ]
+  },
+  {
+    "name": "official_ad_manager_li_get_campaign_group_reporting",
+    "method": "GET",
+    "path": "/ad-publishing/linkedin/reporting/campaign-group/{campaignGroupId}",
+    "app": "ad-manager",
+    "summary": "Get campaign group reporting",
+    "operationId": "li-get-campaign-group-reporting",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "adPublishing.readonly"
+    ],
+    "pathParams": [
+      "campaignGroupId"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location ID"
+      },
+      {
+        "name": "startDate",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Start date in yyyy-mm-dd format"
+      },
+      {
+        "name": "endDate",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "End date in yyyy-mm-dd format"
+      },
+      {
+        "name": "fields",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": "Comma-separated list of fields to retrieve"
+      },
+      {
+        "name": "campaignGroupId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Campaign group ID"
+      }
+    ]
+  },
+  {
+    "name": "official_affiliate_manager_list_affiliates",
+    "method": "GET",
+    "path": "/affiliate-manager/{locationId}/affiliates",
+    "app": "affiliate-manager",
+    "summary": "List Affiliates",
+    "operationId": "list-affiliates",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "affiliate-manager.readonly"
+    ],
+    "pathParams": [
+      "locationId"
+    ],
+    "queryParams": [
+      {
+        "name": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "active",
+        "required": false,
+        "schema": {
+          "default": false,
+          "type": "string"
+        }
+      },
+      {
+        "name": "campaignId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "skip",
+        "required": false,
+        "schema": {
+          "default": 0,
+          "type": "number"
+        }
+      },
+      {
+        "name": "limit",
+        "required": false,
+        "schema": {
+          "default": 10,
+          "type": "number"
+        },
+        "description": "Maximum number of records to return. Maximum allowed value is 100."
+      },
+      {
+        "name": "fromDate",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "toDate",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "name": "official_affiliate_manager_get_affiliate",
+    "method": "GET",
+    "path": "/affiliate-manager/{locationId}/affiliates/{affiliateId}",
+    "app": "affiliate-manager",
+    "summary": "Get Affiliate",
+    "operationId": "get-affiliate",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "affiliate-manager.readonly"
+    ],
+    "pathParams": [
+      "locationId",
+      "affiliateId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_affiliate_manager_list_payouts",
+    "method": "GET",
+    "path": "/affiliate-manager/{locationId}/payouts",
+    "app": "affiliate-manager",
+    "summary": "List Payouts",
+    "operationId": "list-payouts",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "affiliate-manager.readonly"
+    ],
+    "pathParams": [
+      "locationId"
+    ],
+    "queryParams": [
+      {
+        "name": "status",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Payout status"
+      },
+      {
+        "name": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "query"
+      },
+      {
+        "name": "affiliateId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Affiliate Id"
+      },
+      {
+        "name": "campaignId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Campaign Id"
+      },
+      {
+        "name": "skip",
+        "required": false,
+        "schema": {
+          "default": 0,
+          "type": "number"
+        }
+      },
+      {
+        "name": "limit",
+        "required": false,
+        "schema": {
+          "default": 10,
+          "type": "number"
+        }
+      },
+      {
+        "name": "start",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "end",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "name": "official_affiliate_manager_list_commissions",
+    "method": "GET",
+    "path": "/affiliate-manager/{locationId}/commissions",
+    "app": "affiliate-manager",
+    "summary": "List Commissions",
+    "operationId": "list-commissions",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "affiliate-manager.readonly"
+    ],
+    "pathParams": [
+      "locationId"
+    ],
+    "queryParams": [
+      {
+        "name": "campaignId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Campaign Id"
+      },
+      {
+        "name": "affiliateId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Affiliate Id"
+      },
+      {
+        "name": "status",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Status"
+      },
+      {
+        "name": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Query"
+      },
+      {
+        "name": "skip",
+        "required": false,
+        "schema": {
+          "default": 0,
+          "type": "number"
+        }
+      },
+      {
+        "name": "limit",
+        "required": false,
+        "schema": {
+          "default": 10,
+          "type": "number"
+        },
+        "description": "Maximum number of records to return. Maximum allowed value is 100."
+      },
+      {
+        "name": "fromDate",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "toDate",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "name": "official_agent_studio_getagents",
+    "method": "GET",
+    "path": "/agent-studio/agent",
+    "app": "agent-studio",
+    "summary": "List Agents",
+    "operationId": "getAgents",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "agent-studio.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "isPublished",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Optional filter to return only agents with a published production version"
+      },
+      {
+        "name": "limit",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "offset",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "source",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "name": "official_agent_studio_promoteandpublish",
+    "method": "POST",
+    "path": "/agent-studio/agent/versions/{versionId}/publish",
+    "app": "agent-studio",
+    "summary": "Promote to Production",
+    "operationId": "promoteAndPublish",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "agent-studio.write"
+    ],
+    "pathParams": [
+      "versionId"
+    ],
+    "queryParams": [
+      {
+        "name": "source",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/PromoteAndPublishDTO"
+    }
+  },
+  {
+    "name": "official_agent_studio_executeagent",
+    "method": "POST",
+    "path": "/agent-studio/agent/{agentId}/execute",
+    "app": "agent-studio",
+    "summary": "Execute Agent",
+    "operationId": "executeAgent",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "agent-studio.write"
+    ],
+    "pathParams": [
+      "agentId"
+    ],
+    "queryParams": [
+      {
+        "name": "source",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/ExecutePublicAgentDTO"
+    }
+  },
+  {
+    "name": "official_agent_studio_getagents_deprecated",
+    "method": "GET",
+    "path": "/agent-studio/public-api/agents",
+    "app": "agent-studio",
+    "summary": "List Agents (Deprecated)",
+    "operationId": "getAgents-deprecated",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "agent-studio.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "limit",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "offset",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "source",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "name": "official_agent_studio_getagentbyid_deprecated",
+    "method": "GET",
+    "path": "/agent-studio/public-api/agents/{agentId}",
+    "app": "agent-studio",
+    "summary": "Get Agent (Deprecated)",
+    "operationId": "getAgentById-deprecated",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "agent-studio.readonly"
+    ],
+    "pathParams": [
+      "agentId"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "source",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "name": "official_agent_studio_executeagent_deprecated",
+    "method": "POST",
+    "path": "/agent-studio/public-api/agents/{agentId}/execute",
+    "app": "agent-studio",
+    "summary": "Execute Agent (Deprecated)",
+    "operationId": "executeAgent-deprecated",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "agent-studio.write"
+    ],
+    "pathParams": [
+      "agentId"
+    ],
+    "queryParams": [
+      {
+        "name": "source",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/ExecutePublicAgentDTO"
+    }
+  },
+  {
+    "name": "official_brand_boards_getbrandboardsbylocation",
+    "method": "GET",
+    "path": "/brand-boards/{locationId}",
+    "app": "brand-boards",
+    "summary": "Get Brand Boards",
+    "operationId": "getBrandBoardsByLocation",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "brand-boards/design-kit.readonly"
+    ],
+    "pathParams": [
+      "locationId"
+    ],
+    "queryParams": [
+      {
+        "name": "limit",
+        "required": false,
+        "schema": {
+          "default": 10,
+          "type": "number"
+        },
+        "description": "Maximum number of brand boards to return"
+      },
+      {
+        "name": "offset",
+        "required": false,
+        "schema": {
+          "default": 0,
+          "type": "number"
+        },
+        "description": "Number of brand boards to skip for pagination"
+      },
+      {
+        "name": "search",
+        "required": false,
+        "schema": {
+          "default": "",
+          "type": "string"
+        },
+        "description": "Search term to filter brand boards by name"
+      },
+      {
+        "name": "deleted",
+        "required": false,
+        "schema": {
+          "default": false,
+          "type": "boolean"
+        },
+        "description": "Include deleted brand boards in results"
+      }
+    ]
+  },
+  {
+    "name": "official_brand_boards_getbrandboardbyid",
+    "method": "GET",
+    "path": "/brand-boards/{locationId}/{id}",
+    "app": "brand-boards",
+    "summary": "Get Brand Board",
+    "operationId": "getBrandBoardById",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "brand-boards/design-kit.readonly"
+    ],
+    "pathParams": [
+      "locationId",
+      "id"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_brand_boards_updatebrandboard",
+    "method": "PATCH",
+    "path": "/brand-boards/{locationId}/{id}",
+    "app": "brand-boards",
+    "summary": "Update a Brand Board",
+    "operationId": "updateBrandBoard",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "brand-boards/design-kit.write"
+    ],
+    "pathParams": [
+      "locationId",
+      "id"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpdateBrandBoardBody"
+    }
+  },
+  {
+    "name": "official_brand_boards_deletebrandboard",
+    "method": "DELETE",
+    "path": "/brand-boards/{locationId}/{id}",
+    "app": "brand-boards",
+    "summary": "Delete a Brand Board",
+    "operationId": "deleteBrandBoard",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "brand-boards/design-kit.write"
+    ],
+    "pathParams": [
+      "locationId",
+      "id"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_brand_boards_createbrandboard",
+    "method": "POST",
+    "path": "/brand-boards/",
+    "app": "brand-boards",
+    "summary": "Create a new brand board",
+    "operationId": "createBrandBoard",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "brand-boards/design-kit.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/CreateBrandBoardParam"
+    }
+  },
+  {
+    "name": "official_calendars_validate_groups_slug",
+    "method": "POST",
+    "path": "/calendars/groups/validate-slug",
+    "app": "calendars",
+    "summary": "Validate group slug",
+    "operationId": "validate-groups-slug",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "calendars/groups.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/ValidateGroupSlugPostBody"
+    }
+  },
+  {
+    "name": "official_calendars_disable_group",
+    "method": "PUT",
+    "path": "/calendars/groups/{groupId}/status",
+    "app": "calendars",
+    "summary": "Disable Group",
+    "operationId": "disable-group",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "calendars/groups.write"
+    ],
+    "pathParams": [
+      "groupId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/GroupStatusUpdateParams"
+    }
+  },
+  {
+    "name": "official_calendars_create_block_slot",
+    "method": "POST",
+    "path": "/calendars/events/block-slots",
+    "app": "calendars",
+    "summary": "Create Block Slot",
+    "operationId": "create-block-slot",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "calendars/events.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/BlockSlotCreateRequestDTO"
+    }
+  },
+  {
+    "name": "official_calendars_delete_event",
+    "method": "DELETE",
+    "path": "/calendars/events/{eventId}",
+    "app": "calendars",
+    "summary": "Delete Event",
+    "operationId": "delete-event",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "calendars/events.write"
+    ],
+    "pathParams": [
+      "eventId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/DeleteAppointmentSchema"
+    }
+  },
+  {
+    "name": "official_calendars_get_appointment_notes",
+    "method": "GET",
+    "path": "/calendars/appointments/{appointmentId}/notes",
+    "app": "calendars",
+    "summary": "Get Notes",
+    "operationId": "get-appointment-notes",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "calendars/events.readonly"
+    ],
+    "pathParams": [
+      "appointmentId"
+    ],
+    "queryParams": [
+      {
+        "name": "limit",
+        "required": true,
+        "schema": {
+          "maximum": 20,
+          "type": "number"
+        },
+        "description": "Limit of notes to fetch"
+      },
+      {
+        "name": "offset",
+        "required": true,
+        "schema": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "description": "Offset of notes to fetch"
+      }
+    ]
+  },
+  {
+    "name": "official_calendars_create_appointment_note",
+    "method": "POST",
+    "path": "/calendars/appointments/{appointmentId}/notes",
+    "app": "calendars",
+    "summary": "Create Note",
+    "operationId": "create-appointment-note",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "calendars/events.write"
+    ],
+    "pathParams": [
+      "appointmentId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/NotesDTO"
+    }
+  },
+  {
+    "name": "official_calendars_update_appointment_note",
+    "method": "PUT",
+    "path": "/calendars/appointments/{appointmentId}/notes/{noteId}",
+    "app": "calendars",
+    "summary": "Update Note",
+    "operationId": "update-appointment-note",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "calendars/events.write"
+    ],
+    "pathParams": [
+      "appointmentId",
+      "noteId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/NotesDTO"
+    }
+  },
+  {
+    "name": "official_calendars_delete_appointment_note",
+    "method": "DELETE",
+    "path": "/calendars/appointments/{appointmentId}/notes/{noteId}",
+    "app": "calendars",
+    "summary": "Delete Note",
+    "operationId": "delete-appointment-note",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "calendars/events.write"
+    ],
+    "pathParams": [
+      "appointmentId",
+      "noteId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_calendars_getallschedules",
+    "method": "GET",
+    "path": "/calendars/schedules/search",
+    "app": "calendars",
+    "summary": "List user availability schedule",
+    "operationId": "getAllSchedules",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "calendars.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location ID to filter schedules by"
+      },
+      {
+        "name": "userId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "User ID to filter schedules by specific user"
+      },
+      {
+        "name": "calendarId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Calendar ID for filtering schedules by specific calendar"
+      },
+      {
+        "name": "skip",
+        "required": false,
+        "schema": {
+          "minimum": 0,
+          "default": 0,
+          "type": "number"
+        },
+        "description": "Number of items to skip for pagination"
+      },
+      {
+        "name": "limit",
+        "required": false,
+        "schema": {
+          "minimum": 1,
+          "maximum": 500,
+          "default": 50,
+          "type": "number"
+        },
+        "description": "Maximum number of items to return (max 500)"
+      }
+    ]
+  },
+  {
+    "name": "official_calendars_getschedulebyid",
+    "method": "GET",
+    "path": "/calendars/schedules/{id}",
+    "app": "calendars",
+    "summary": "Get user availability schedule",
+    "operationId": "getScheduleById",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "calendars.readonly"
+    ],
+    "pathParams": [
+      "id"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_calendars_updateschedule",
+    "method": "PUT",
+    "path": "/calendars/schedules/{id}",
+    "app": "calendars",
+    "summary": "Update user availability schedule",
+    "operationId": "updateSchedule",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "calendars.write"
+    ],
+    "pathParams": [
+      "id"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpdateScheduleDTO"
+    }
+  },
+  {
+    "name": "official_calendars_deleteschedule",
+    "method": "DELETE",
+    "path": "/calendars/schedules/{id}",
+    "app": "calendars",
+    "summary": "Delete user availability schedule",
+    "operationId": "deleteSchedule",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "calendars.write"
+    ],
+    "pathParams": [
+      "id"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_calendars_createschedule",
+    "method": "POST",
+    "path": "/calendars/schedules",
+    "app": "calendars",
+    "summary": "Create user availability schedule",
+    "operationId": "createSchedule",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "calendars.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/CreateScheduleDTO"
+    }
+  },
+  {
+    "name": "official_calendars_add_calendar_to_schedule",
+    "method": "PUT",
+    "path": "/calendars/schedules/{id}/associations/{calendarId}",
+    "app": "calendars",
+    "summary": "Apply user availability schedule to a calendar",
+    "operationId": "add-calendar-to-schedule",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "calendars.write"
+    ],
+    "pathParams": [
+      "id",
+      "calendarId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_calendars_remove_calendar_from_schedule",
+    "method": "DELETE",
+    "path": "/calendars/schedules/{id}/associations/{calendarId}",
+    "app": "calendars",
+    "summary": "Remove user availability schedule from a calendar",
+    "operationId": "remove-calendar-from-schedule",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "calendars.write"
+    ],
+    "pathParams": [
+      "id",
+      "calendarId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_campaigns_get_campaigns",
+    "method": "GET",
+    "path": "/campaigns/",
+    "app": "campaigns",
+    "summary": "Get Campaigns",
+    "operationId": "get-campaigns",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "campaigns.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "status",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "name": "official_contacts_create_association",
+    "method": "POST",
+    "path": "/contacts/bulk/tags/update/{type}",
+    "app": "contacts",
+    "summary": "Update Contacts Tags",
+    "operationId": "create-association",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "type"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpdateTagsDTO"
+    }
+  },
+  {
+    "name": "official_contacts_add_remove_contact_from_business",
+    "method": "POST",
+    "path": "/contacts/bulk/business",
+    "app": "contacts",
+    "summary": "Add/Remove Contacts From Business",
+    "operationId": "add-remove-contact-from-business",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/ContactsBusinessUpdate"
+    }
+  },
+  {
+    "name": "official_contacts_remove_contact_from_every_campaign",
+    "method": "DELETE",
+    "path": "/contacts/{contactId}/campaigns/removeAll",
+    "app": "contacts",
+    "summary": "Remove Contact From Every Campaign",
+    "operationId": "remove-contact-from-every-campaign",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "contacts.write"
+    ],
+    "pathParams": [
+      "contactId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_contacts_get_contacts",
+    "method": "GET",
+    "path": "/contacts/",
+    "app": "contacts",
+    "summary": "Get Contacts",
+    "operationId": "get-contacts",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "contacts.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location Id"
+      },
+      {
+        "name": "startAfterId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Start After Id"
+      },
+      {
+        "name": "startAfter",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "description": "Start Afte"
+      },
+      {
+        "name": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Contact Query"
+      },
+      {
+        "name": "limit",
+        "required": false,
+        "schema": {
+          "default": 20,
+          "type": "number"
+        },
+        "description": "Limit Per Page records count. will allow maximum up to 100 and default will be 20"
+      }
+    ]
+  },
+  {
+    "name": "official_conversation_ai_create_action",
+    "method": "POST",
+    "path": "/conversation-ai/agents/{agentId}/actions",
+    "app": "conversation-ai",
+    "summary": "Attach Action to Agent",
+    "operationId": "create-action",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "conversation-ai.write"
+    ],
+    "pathParams": [
+      "agentId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/CreateActionDTO"
+    }
+  },
+  {
+    "name": "official_conversation_ai_list_actions",
+    "method": "GET",
+    "path": "/conversation-ai/agents/{agentId}/actions/list",
+    "app": "conversation-ai",
+    "summary": "List Actions for an Agent",
+    "operationId": "list-actions",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "conversation-ai.readonly"
+    ],
+    "pathParams": [
+      "agentId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_conversation_ai_get_action_by_id",
+    "method": "GET",
+    "path": "/conversation-ai/agents/{agentId}/actions/{actionId}",
+    "app": "conversation-ai",
+    "summary": "Get Action by ID",
+    "operationId": "get-action-by-id",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "conversation-ai.readonly"
+    ],
+    "pathParams": [
+      "agentId",
+      "actionId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_conversation_ai_update_action",
+    "method": "PUT",
+    "path": "/conversation-ai/agents/{agentId}/actions/{actionId}",
+    "app": "conversation-ai",
+    "summary": "Update Action",
+    "operationId": "update-action",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "conversation-ai.write"
+    ],
+    "pathParams": [
+      "agentId",
+      "actionId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/CreateActionDTO"
+    }
+  },
+  {
+    "name": "official_conversation_ai_delete_action",
+    "method": "DELETE",
+    "path": "/conversation-ai/agents/{agentId}/actions/{actionId}",
+    "app": "conversation-ai",
+    "summary": "Remove Action from Agent",
+    "operationId": "delete-action",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "conversation-ai.write"
+    ],
+    "pathParams": [
+      "agentId",
+      "actionId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_conversation_ai_update_followup_settings",
+    "method": "PATCH",
+    "path": "/conversation-ai/agents/{agentId}/followup-settings",
+    "app": "conversation-ai",
+    "summary": "Update Followup Settings",
+    "operationId": "update-followup-settings",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "conversation-ai.write"
+    ],
+    "pathParams": [
+      "agentId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpdateFollowupSettingsDTO"
+    }
+  },
+  {
+    "name": "official_conversation_ai_create_agent",
+    "method": "POST",
+    "path": "/conversation-ai/agents",
+    "app": "conversation-ai",
+    "summary": "Create an Agent",
+    "operationId": "create-agent",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "conversation-ai.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/CreateEmployeeDto"
+    }
+  },
+  {
+    "name": "official_conversation_ai_search_agent",
+    "method": "GET",
+    "path": "/conversation-ai/agents/search",
+    "app": "conversation-ai",
+    "summary": "Search Agents",
+    "operationId": "search-agent",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "conversation-ai.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "startAfter",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Start after is the agent id to start after, Serving as skip, send empty when first page"
+      },
+      {
+        "name": "limit",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "description": "Records per page"
+      },
+      {
+        "name": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "query to search on agent name, must be provided in lowercase"
+      }
+    ]
+  },
+  {
+    "name": "official_conversation_ai_update_agent",
+    "method": "PUT",
+    "path": "/conversation-ai/agents/{agentId}",
+    "app": "conversation-ai",
+    "summary": "Update Agent",
+    "operationId": "update-agent",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "conversation-ai.write"
+    ],
+    "pathParams": [
+      "agentId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpdateEmployeeDto"
+    }
+  },
+  {
+    "name": "official_conversation_ai_get_agent",
+    "method": "GET",
+    "path": "/conversation-ai/agents/{agentId}",
+    "app": "conversation-ai",
+    "summary": "Get Agent",
+    "operationId": "get-agent",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "conversation-ai.readonly"
+    ],
+    "pathParams": [
+      "agentId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_conversation_ai_delete_agent",
+    "method": "DELETE",
+    "path": "/conversation-ai/agents/{agentId}",
+    "app": "conversation-ai",
+    "summary": "Delete Agent",
+    "operationId": "delete-agent",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "conversation-ai.write"
+    ],
+    "pathParams": [
+      "agentId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_conversation_ai_get_generation_details",
+    "method": "GET",
+    "path": "/conversation-ai/generations",
+    "app": "conversation-ai",
+    "summary": "Get the generation details",
+    "operationId": "get-generation-details",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "conversation-ai.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "messageId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Message Id"
+      },
+      {
+        "name": "source",
+        "required": true,
+        "schema": {
+          "enum": [
+            "conversation",
+            "workflow"
+          ],
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "name": "official_conversations_get_all_custom_subtypes",
+    "method": "GET",
+    "path": "/conversations/preferences/custom-subtypes",
+    "app": "conversations",
+    "summary": "Get All Custom Subtypes",
+    "operationId": "get-all-custom-subtypes",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location Id"
+      }
+    ]
+  },
+  {
+    "name": "official_conversations_create_custom_subtype",
+    "method": "POST",
+    "path": "/conversations/preferences/custom-subtypes",
+    "app": "conversations",
+    "summary": "Create Custom Subtype",
+    "operationId": "create-custom-subtype",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location Id"
+      }
+    ],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/CreateCustomSubtypeDto"
+    }
+  },
+  {
+    "name": "official_conversations_update_custom_subtype",
+    "method": "PUT",
+    "path": "/conversations/preferences/custom-subtypes/{id}",
+    "app": "conversations",
+    "summary": "Update Custom Subtype",
+    "operationId": "update-custom-subtype",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "id"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location Id"
+      }
+    ],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpdateCustomSubtypeDto"
+    }
+  },
+  {
+    "name": "official_conversations_get_contact_unsubscription_status",
+    "method": "GET",
+    "path": "/conversations/preferences/unsubscriptions/status",
+    "app": "conversations",
+    "summary": "Get Contact Unsubscription Status",
+    "operationId": "get-contact-unsubscription-status",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location Id"
+      },
+      {
+        "name": "contactId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Contact Id"
+      },
+      {
+        "name": "email",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Email address (optional - if not provided, gets all emails for contact)"
+      }
+    ]
+  },
+  {
+    "name": "official_conversations_user_subscription_change",
+    "method": "POST",
+    "path": "/conversations/preferences/unsubscriptions/user-change",
+    "app": "conversations",
+    "summary": "User Subscription Change",
+    "operationId": "user-subscription-change",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UserSubscriptionChangeDto"
+    }
+  },
+  {
+    "name": "official_conversations_export_messages_by_location",
+    "method": "GET",
+    "path": "/conversations/messages/export",
+    "app": "conversations",
+    "summary": "Export messages by location ID",
+    "operationId": "export-messages-by-location",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "conversations/message.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location ID to filter messages by"
+      },
+      {
+        "name": "limit",
+        "required": false,
+        "schema": {
+          "minimum": 10,
+          "maximum": 500,
+          "default": 100,
+          "type": "number"
+        },
+        "description": "Number of messages to return per page"
+      },
+      {
+        "name": "cursor",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Cursor for pagination. Pass the nextCursor from previous response to get next page."
+      },
+      {
+        "name": "sortBy",
+        "required": false,
+        "schema": {
+          "default": "createdAt",
+          "enum": [
+            "createdAt",
+            "updatedAt"
+          ],
+          "type": "string"
+        },
+        "description": "Field to sort by"
+      },
+      {
+        "name": "sortOrder",
+        "required": false,
+        "schema": {
+          "default": "desc",
+          "enum": [
+            "asc",
+            "desc"
+          ],
+          "type": "string"
+        },
+        "description": "Sort order"
+      },
+      {
+        "name": "conversationId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Filter messages by conversation ID"
+      },
+      {
+        "name": "contactId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Filter messages by contact ID"
+      },
+      {
+        "name": "channel",
+        "required": false,
+        "schema": {
+          "enum": [
+            "Call",
+            "SMS",
+            "Email",
+            "WhatsApp",
+            "Instagram",
+            "Facebook"
+          ],
+          "type": "string"
+        },
+        "description": "Filter by message channel. If not provided, all non-email message types will be returned including activity messages (opportunity updates, appointments, etc.)"
+      },
+      {
+        "name": "startDate",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Start date to filter messages by"
+      },
+      {
+        "name": "endDate",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "End date to filter messages by"
+      }
+    ]
+  },
+  {
+    "name": "official_conversations_send_review_reply",
+    "method": "POST",
+    "path": "/conversations/messages/review-reply",
+    "app": "conversations",
+    "summary": "Send a review reply to Google My Business",
+    "operationId": "send-review-reply",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "conversations/message.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/SendReviewReplyDto"
+    }
+  },
+  {
+    "name": "official_conversations_initiate_file_upload",
+    "method": "POST",
+    "path": "/conversations/messages/upload/initiate",
+    "app": "conversations",
+    "summary": "Initiate file upload to GCS",
+    "operationId": "initiate-file-upload",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "conversations/message.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/InitiateFileUploadDto"
+    }
+  },
+  {
+    "name": "official_conversations_complete_file_upload",
+    "method": "POST",
+    "path": "/conversations/messages/upload/complete",
+    "app": "conversations",
+    "summary": "Complete file upload",
+    "operationId": "complete-file-upload",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "conversations/message.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/CompleteFileUploadDto"
+    }
+  },
+  {
+    "name": "official_conversations_add_message_attachments",
+    "method": "PUT",
+    "path": "/conversations/messages/{messageId}/attachments",
+    "app": "conversations",
+    "summary": "Add message attachments",
+    "operationId": "add-message-attachments",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [
+      "conversations/message.write"
+    ],
+    "pathParams": [
+      "messageId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/AddMessageAttachmentsDto"
+    }
+  },
+  {
+    "name": "official_courses_import_courses",
+    "method": "POST",
+    "path": "/courses/courses-exporter/public/import",
+    "app": "courses",
+    "summary": "Import Courses",
+    "operationId": "import-courses",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/PublicExporterPayload"
+    }
+  },
+  {
+    "name": "official_custom_menus_get_custom_menus",
+    "method": "GET",
+    "path": "/custom-menus/",
+    "app": "custom-menus",
+    "summary": "Get Custom Menu Links",
+    "operationId": "get-custom-menus",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "custom-menu-link.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Unique identifier of the location"
+      },
+      {
+        "name": "skip",
+        "required": false,
+        "schema": {
+          "minimum": 0,
+          "default": 0,
+          "type": "number"
+        },
+        "description": "Number of items to skip for pagination"
+      },
+      {
+        "name": "limit",
+        "required": false,
+        "schema": {
+          "minimum": 1,
+          "default": 20,
+          "type": "number"
+        },
+        "description": "Maximum number of items to return"
+      },
+      {
+        "name": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Search query to filter custom menus by name, supports partial || full names"
+      },
+      {
+        "name": "showOnCompany",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        },
+        "description": "Filter to show only agency-level menu links. When omitted, fetches both agency and sub-account menu links. Ignored if locationId is provided"
+      }
+    ]
+  },
+  {
+    "name": "official_funnels_create_redirect",
+    "method": "POST",
+    "path": "/funnels/lookup/redirect",
+    "app": "funnels",
+    "summary": "Create Redirect",
+    "operationId": "create-redirect",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "funnels/redirect.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/CreateRedirectParams"
+    }
+  },
+  {
+    "name": "official_funnels_update_redirect_by_id",
+    "method": "PATCH",
+    "path": "/funnels/lookup/redirect/{id}",
+    "app": "funnels",
+    "summary": "Update Redirect By Id",
+    "operationId": "update-redirect-by-id",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "funnels/redirect.write"
+    ],
+    "pathParams": [
+      "id"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpdateRedirectParams"
+    }
+  },
+  {
+    "name": "official_funnels_delete_redirect_by_id",
+    "method": "DELETE",
+    "path": "/funnels/lookup/redirect/{id}",
+    "app": "funnels",
+    "summary": "Delete Redirect By Id",
+    "operationId": "delete-redirect-by-id",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "funnels/redirect.write"
+    ],
+    "pathParams": [
+      "id"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "name": "official_funnels_fetch_redirects_list",
+    "method": "GET",
+    "path": "/funnels/lookup/redirect/list",
+    "app": "funnels",
+    "summary": "Fetch List of Redirects",
+    "operationId": "fetch-redirects-list",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "funnels/redirect.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "limit",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "offset",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "search",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "name": "official_funnels_getfunnels",
+    "method": "GET",
+    "path": "/funnels/funnel/list",
+    "app": "funnels",
+    "summary": "Fetch List of Funnels",
+    "operationId": "getFunnels",
+    "versions": [],
+    "scopes": [],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "type",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "category",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "offset",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "limit",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "parentId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "name",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "name": "official_funnels_getpagesbyfunnelid",
+    "method": "GET",
+    "path": "/funnels/page",
+    "app": "funnels",
+    "summary": "Fetch list of funnel pages",
+    "operationId": "getPagesByFunnelId",
+    "versions": [],
+    "scopes": [],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "funnelId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "name",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "limit",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "offset",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      }
+    ]
+  },
+  {
+    "name": "official_funnels_getpagescountbyfunnelid",
+    "method": "GET",
+    "path": "/funnels/page/count",
+    "app": "funnels",
+    "summary": "Fetch count of funnel pages",
+    "operationId": "getPagesCountByFunnelId",
+    "versions": [],
+    "scopes": [],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "funnelId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "name",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "name": "official_invoices_get_invoice_settings",
+    "method": "GET",
+    "path": "/invoices/settings",
+    "app": "invoices",
+    "summary": "Get Invoice Settings",
+    "operationId": "get-invoice-settings",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "invoices.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "altId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location Id or Agency Id"
+      },
+      {
+        "name": "altType",
+        "required": true,
+        "schema": {
+          "enum": [
+            "location"
+          ],
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "name": "official_knowledge_base_list",
+    "method": "GET",
+    "path": "/knowledge-bases/faqs",
+    "app": "knowledge-base",
+    "summary": "Get all FAQs by knowledge base with pagination support",
+    "operationId": "list",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "knowledgeBaseId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "knowledge base ID as string"
+      },
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "location ID as string"
+      },
+      {
+        "name": "limit",
+        "required": false,
+        "schema": {
+          "default": 10,
+          "type": "number"
+        },
+        "description": "Limit the number of FAQs returned"
+      },
+      {
+        "name": "lastFaqId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Last FAQ ID for pagination (cursor-based)"
+      }
+    ]
+  },
+  {
+    "name": "official_knowledge_base_create",
+    "method": "POST",
+    "path": "/knowledge-bases/faqs",
+    "app": "knowledge-base",
+    "summary": "Create a new FAQ inside knowledge base",
+    "operationId": "create",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/AddFaqDTO"
+    }
+  },
+  {
+    "name": "official_knowledge_base_update",
+    "method": "PUT",
+    "path": "/knowledge-bases/faqs/{id}",
+    "app": "knowledge-base",
+    "summary": "Update an existing knowledge base FAQ",
+    "operationId": "update",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "id"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpdateFaqBodyDTO"
+    }
+  },
+  {
+    "name": "official_knowledge_base_delete",
+    "method": "DELETE",
+    "path": "/knowledge-bases/faqs/{id}",
+    "app": "knowledge-base",
+    "summary": "Delete an existing knowledge base FAQ",
+    "operationId": "delete",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "id"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_knowledge_base_getallwebsiteurlsdatabyknowledgebase",
+    "method": "GET",
+    "path": "/knowledge-bases/crawler",
+    "app": "knowledge-base",
+    "summary": "Get all trained page links by knowledge base",
+    "operationId": "getAllWebsiteUrlsDataByKnowledgeBase",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "knowledgeBaseId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "knowledge base ID as string"
+      },
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "location ID as string"
+      },
+      {
+        "name": "page",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "description": "Page number"
+      },
+      {
+        "name": "pageLength",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "description": "Records per page"
+      },
+      {
+        "name": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "query to filter on url links"
+      }
+    ]
+  },
+  {
+    "name": "official_knowledge_base_discoverwebsite",
+    "method": "POST",
+    "path": "/knowledge-bases/crawler",
+    "app": "knowledge-base",
+    "summary": "Start crawling and discover pages for training",
+    "operationId": "discoverWebsite",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/DiscoverWebsiteRequestDTO"
+    }
+  },
+  {
+    "name": "official_knowledge_base_deletetrainedurlsforknowledgebase",
+    "method": "DELETE",
+    "path": "/knowledge-bases/crawler",
+    "app": "knowledge-base",
+    "summary": "Delete trained pages",
+    "operationId": "deleteTrainedUrlsForKnowledgeBase",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/DeleteWebsiteUrlRequestDTO"
+    }
+  },
+  {
+    "name": "official_knowledge_base_getcrawlingstatusforlatestoperation",
+    "method": "GET",
+    "path": "/knowledge-bases/crawler/status",
+    "app": "knowledge-base",
+    "summary": "Get crawling status for the latest operation",
+    "operationId": "getCrawlingStatusForLatestOperation",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location ID as string"
+      },
+      {
+        "name": "operationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "operation id as string"
+      },
+      {
+        "name": "knowledgeBaseId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "knowledge base id"
+      }
+    ]
+  },
+  {
+    "name": "official_knowledge_base_traindiscoveredurls",
+    "method": "POST",
+    "path": "/knowledge-bases/crawler/train",
+    "app": "knowledge-base",
+    "summary": "Train discovered website pages and ingest into the knowledge base",
+    "operationId": "trainDiscoveredUrls",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/TrainDiscoveredUrlsDTO"
+    }
+  },
+  {
+    "name": "official_knowledge_base_getknowledgebasebyid",
+    "method": "GET",
+    "path": "/knowledge-bases/{knowledgeBaseId}",
+    "app": "knowledge-base",
+    "summary": "Get knowledge base by ID",
+    "operationId": "getKnowledgeBaseById",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "knowledgeBaseId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_knowledge_base_deleteknowledgebase",
+    "method": "DELETE",
+    "path": "/knowledge-bases/{knowledgeBaseId}",
+    "app": "knowledge-base",
+    "summary": "Delete a knowledge base",
+    "operationId": "deleteKnowledgeBase",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "knowledgeBaseId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_knowledge_base_updateknowledgebase",
+    "method": "PUT",
+    "path": "/knowledge-bases/{id}",
+    "app": "knowledge-base",
+    "summary": "Update a knowledge base",
+    "operationId": "updateKnowledgeBase",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "id"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpdateKnowledgeBaseDTO"
+    }
+  },
+  {
+    "name": "official_knowledge_base_listallknowledgebasespaginated",
+    "method": "GET",
+    "path": "/knowledge-bases/",
+    "app": "knowledge-base",
+    "summary": "Get all knowledge bases for a location by location Id (paginated)",
+    "operationId": "listAllKnowledgeBasesPaginated",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "search query for knowledge base name"
+      },
+      {
+        "name": "limit",
+        "required": false,
+        "schema": {
+          "default": 20,
+          "type": "number"
+        },
+        "description": "Maximum number of knowledge bases to return"
+      },
+      {
+        "name": "lastKnowledgeBaseId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "ID of the last knowledge base from the previous page (for pagination)"
+      }
+    ]
+  },
+  {
+    "name": "official_knowledge_base_createknowledgebase",
+    "method": "POST",
+    "path": "/knowledge-bases/",
+    "app": "knowledge-base",
+    "summary": "Create a new knowledge base (max 15 knowledge bases per location)",
+    "operationId": "createKnowledgeBase",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/CreateKnowledgeBaseDTO"
+    }
+  },
+  {
+    "name": "official_links_get_link_by_id",
+    "method": "GET",
+    "path": "/links/id/{linkId}",
+    "app": "links",
+    "summary": "Get Link by ID",
+    "operationId": "get-link-by-id",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "linkId"
+    ],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location Id"
+      }
+    ]
+  },
+  {
+    "name": "official_locations_get_timezones",
+    "method": "GET",
+    "path": "/locations/{locationId}/timezones",
+    "app": "locations",
+    "summary": "Fetch Timezones",
+    "operationId": "get-timezones",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "locations.readonly"
+    ],
+    "pathParams": [
+      "locationId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_marketplace_getcharges",
+    "method": "GET",
+    "path": "/marketplace/billing/charges",
+    "app": "marketplace",
+    "summary": "Get all wallet charges",
+    "operationId": "getCharges",
+    "versions": [],
+    "scopes": [
+      "charges.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "meterId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Billing Meter ID (you can find this on your app's pricing page on the developer portal)"
+      },
+      {
+        "name": "eventId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Event ID / Transaction ID"
+      },
+      {
+        "name": "userId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Filter results by User ID that your server passed via API when the charge was created"
+      },
+      {
+        "name": "startDate",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Filter results AFTER a specific date. Use this in combination with endDate to filter results in a specific time window."
+      },
+      {
+        "name": "endDate",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Filter results BEFORE a specific date. Use this in combination with startDate to filter results in a specific time window."
+      },
+      {
+        "name": "skip",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "description": "Number of records to skip"
+      },
+      {
+        "name": "limit",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "description": "Maximum number of records to return"
+      }
+    ]
+  },
+  {
+    "name": "official_marketplace_get_installer_details",
+    "method": "GET",
+    "path": "/marketplace/app/{appId}/installations",
+    "app": "marketplace",
+    "summary": "Get Installer Details",
+    "operationId": "get-installer-details",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "marketplace-installer-details.readonly"
+    ],
+    "pathParams": [
+      "appId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_marketplace_get_rebilling_config_for_app",
+    "method": "GET",
+    "path": "/marketplace/app/{appId}/rebilling-config/location/{locationId}",
+    "app": "marketplace",
+    "summary": "Get rebilling config for an app subscription and usage plans",
+    "operationId": "get-rebilling-config-for-app",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "oauth.readonly"
+    ],
+    "pathParams": [
+      "appId",
+      "locationId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_marketplace_migrateconnection",
+    "method": "POST",
+    "path": "/marketplace/external-auth/migration",
+    "app": "marketplace",
+    "summary": "Migrate external authentication connection",
+    "operationId": "migrateConnection",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "marketplace-external-auth-migration.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/MigrateConnectionDto"
+    }
+  },
+  {
+    "name": "official_oauth_get_access_token",
+    "method": "POST",
+    "path": "/oauth/token",
+    "app": "oauth",
+    "summary": "Get Access Token",
+    "operationId": "get-access-token",
+    "versions": [],
+    "scopes": [],
+    "pathParams": [],
+    "queryParams": []
+  },
+  {
+    "name": "official_opportunities_get_lost_reason",
+    "method": "GET",
+    "path": "/opportunities/lost-reason",
+    "app": "opportunities",
+    "summary": "Get lost reason",
+    "operationId": "get-lost-reason",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "opportunities.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "name",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "lost reason name"
+      },
+      {
+        "name": "deleted",
+        "required": false,
+        "schema": {
+          "default": false,
+          "type": "boolean"
+        },
+        "description": "deleted"
+      },
+      {
+        "name": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "search query"
+      },
+      {
+        "name": "skip",
+        "required": false,
+        "schema": {
+          "default": 0,
+          "type": "number"
+        },
+        "description": "skip"
+      },
+      {
+        "name": "limit",
+        "required": false,
+        "schema": {
+          "default": 100,
+          "type": "number"
+        },
+        "description": "limit"
+      },
+      {
+        "name": "getCount",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        },
+        "description": "get count"
+      }
+    ]
+  },
+  {
+    "name": "official_opportunities_search_opportunities_advanced",
+    "method": "POST",
+    "path": "/opportunities/search",
+    "app": "opportunities",
+    "summary": "Search Opportunities",
+    "operationId": "search-opportunities-advanced",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "opportunities.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/OpportunitySearchBodyDTO"
+    }
+  },
+  {
+    "name": "official_payments_custom_provider_marketplace_app_update_capabilities",
+    "method": "PUT",
+    "path": "/payments/custom-provider/capabilities",
+    "app": "payments",
+    "summary": "Custom-provider marketplace app update capabilities",
+    "operationId": "custom-provider-marketplace-app-update-capabilities",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "payments/custom-provider.write"
+    ],
+    "pathParams": [],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpdateCustomProviderCapabilitiesDto"
+    }
+  },
+  {
+    "name": "official_phone_system_getnumberpoollist",
+    "method": "GET",
+    "path": "/phone-system/number-pools",
+    "app": "phone-system",
+    "summary": "List Number Pools",
+    "operationId": "getNumberPoolList",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "numberpools.read"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location ID to filter pools"
+      }
+    ]
+  },
+  {
+    "name": "official_phone_system_available_numbers",
+    "method": "GET",
+    "path": "/phone-system/numbers/location/{locationId}/available",
+    "app": "phone-system",
+    "summary": "List available phone numbers",
+    "operationId": "available-numbers",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "phonenumbers.read"
+    ],
+    "pathParams": [
+      "locationId"
+    ],
+    "queryParams": [
+      {
+        "name": "countryCode",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "ISO 3166-1 alpha-2 country code for which to search available numbers"
+      },
+      {
+        "name": "numberTypes",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Comma-separated list of phone number types to search for (e.g. local, tollFree, mobile)"
+      },
+      {
+        "name": "firstPart",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Filter numbers that begin with this digit pattern"
+      },
+      {
+        "name": "lastPart",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Filter numbers that end with this digit pattern"
+      },
+      {
+        "name": "anywhere",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Filter numbers that contain this digit pattern anywhere"
+      },
+      {
+        "name": "smsEnabled",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        },
+        "description": "Filter for numbers with SMS capability"
+      },
+      {
+        "name": "mmsEnabled",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        },
+        "description": "Filter for numbers with MMS capability"
+      },
+      {
+        "name": "voiceEnabled",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        },
+        "description": "Filter for numbers with voice capability"
+      }
+    ]
+  },
+  {
+    "name": "official_phone_system_purchase_phone_number",
+    "method": "POST",
+    "path": "/phone-system/numbers/location/{locationId}/purchase",
+    "app": "phone-system",
+    "summary": "Purchase a phone number",
+    "operationId": "purchase-phone-number",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "phonenumbers.write"
+    ],
+    "pathParams": [
+      "locationId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/PurchasePhoneNumberBodyDto"
+    }
+  },
+  {
+    "name": "official_products_update_display_priority",
+    "method": "POST",
+    "path": "/products/store/{storeId}/priority",
+    "app": "products",
+    "summary": "Update product display priorities in store",
+    "operationId": "update-display-priority",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "storeId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpdateDisplayPriorityBodyDto"
+    }
+  },
+  {
+    "name": "official_saas_api_update_saas_subscription_deprecated",
+    "method": "PUT",
+    "path": "/saas-api/public-api/update-saas-subscription/{locationId}",
+    "app": "saas-api",
+    "summary": "Update SaaS subscription",
+    "operationId": "update-saas-subscription-deprecated",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpdateSubscriptionDto"
+    }
+  },
+  {
+    "name": "official_saas_api_bulk_disable_saas_deprecated",
+    "method": "POST",
+    "path": "/saas-api/public-api/bulk-disable-saas/{companyId}",
+    "app": "saas-api",
+    "summary": "Disable SaaS for locations",
+    "operationId": "bulk-disable-saas-deprecated",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "companyId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/BulkDisableSaasDto"
+    }
+  },
+  {
+    "name": "official_saas_api_enable_saas_location_deprecated",
+    "method": "POST",
+    "path": "/saas-api/public-api/enable-saas/{locationId}",
+    "app": "saas-api",
+    "summary": "Enable SaaS for Sub-Account (Formerly Location)",
+    "operationId": "enable-saas-location-deprecated",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/EnableSaasDto"
+    }
+  },
+  {
+    "name": "official_saas_api_pause_location_deprecated",
+    "method": "POST",
+    "path": "/saas-api/public-api/pause/{locationId}",
+    "app": "saas-api",
+    "summary": "Pause location",
+    "operationId": "pause-location-deprecated",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/PauseLocationDto"
+    }
+  },
+  {
+    "name": "official_saas_api_update_rebilling_deprecated",
+    "method": "POST",
+    "path": "/saas-api/public-api/update-rebilling/{companyId}",
+    "app": "saas-api",
+    "summary": "Update Rebilling",
+    "operationId": "update-rebilling-deprecated",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "companyId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpdateRebillingDto"
+    }
+  },
+  {
+    "name": "official_saas_api_get_agency_plans_deprecated",
+    "method": "GET",
+    "path": "/saas-api/public-api/agency-plans/{companyId}",
+    "app": "saas-api",
+    "summary": "Get Agency Plans",
+    "operationId": "get-agency-plans-deprecated",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "companyId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_saas_api_get_location_subscription_deprecated",
+    "method": "GET",
+    "path": "/saas-api/public-api/get-saas-subscription/{locationId}",
+    "app": "saas-api",
+    "summary": "Get Location Subscription Details",
+    "operationId": "get-location-subscription-deprecated",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId"
+    ],
+    "queryParams": [
+      {
+        "name": "companyId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Company ID to filter subscription details"
+      }
+    ]
+  },
+  {
+    "name": "official_saas_api_bulk_enable_saas_deprecated",
+    "method": "POST",
+    "path": "/saas-api/public-api/bulk-enable-saas/{companyId}",
+    "app": "saas-api",
+    "summary": "Bulk Enable SaaS",
+    "operationId": "bulk-enable-saas-deprecated",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "companyId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/BulkEnableSaasRequestDto"
+    }
+  },
+  {
+    "name": "official_saas_api_get_saas_locations_deprecated",
+    "method": "GET",
+    "path": "/saas-api/public-api/saas-locations/{companyId}",
+    "app": "saas-api",
+    "summary": "Get SaaS Locations",
+    "operationId": "get-saas-locations-deprecated",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "companyId"
+    ],
+    "queryParams": [
+      {
+        "name": "page",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "description": "Page number for pagination"
+      }
+    ]
+  },
+  {
+    "name": "official_saas_api_get_saas_plan_deprecated",
+    "method": "GET",
+    "path": "/saas-api/public-api/saas-plan/{planId}",
+    "app": "saas-api",
+    "summary": "Get SaaS Plan",
+    "operationId": "get-saas-plan-deprecated",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "planId"
+    ],
+    "queryParams": [
+      {
+        "name": "companyId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Company ID to filter SaaS plan"
+      }
+    ]
+  },
+  {
+    "name": "official_saas_api_locations",
+    "method": "GET",
+    "path": "/saas/locations",
+    "app": "saas-api",
+    "summary": "Get locations by stripeId with companyId",
+    "operationId": "locations",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "customerId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "subscriptionId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "companyId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "name": "official_saas_api_generate_payment_link",
+    "method": "PUT",
+    "path": "/saas/update-saas-subscription/{locationId}",
+    "app": "saas-api",
+    "summary": "Update SaaS subscription",
+    "operationId": "generate-payment-link",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpdateSubscriptionDto"
+    }
+  },
+  {
+    "name": "official_saas_api_bulk_disable_saas",
+    "method": "POST",
+    "path": "/saas/bulk-disable-saas/{companyId}",
+    "app": "saas-api",
+    "summary": "Disable SaaS for locations",
+    "operationId": "bulk-disable-saas",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "companyId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/BulkDisableSaasDto"
+    }
+  },
+  {
+    "name": "official_saas_api_enable_saas_location",
+    "method": "POST",
+    "path": "/saas/enable-saas/{locationId}",
+    "app": "saas-api",
+    "summary": "Enable SaaS for Sub-Account (Formerly Location)",
+    "operationId": "enable-saas-location",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/EnableSaasDto"
+    }
+  },
+  {
+    "name": "official_saas_api_pause_location",
+    "method": "POST",
+    "path": "/saas/pause/{locationId}",
+    "app": "saas-api",
+    "summary": "Pause location",
+    "operationId": "pause-location",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/PauseLocationDto"
+    }
+  },
+  {
+    "name": "official_saas_api_update_rebilling",
+    "method": "POST",
+    "path": "/saas/update-rebilling/{companyId}",
+    "app": "saas-api",
+    "summary": "Update Rebilling",
+    "operationId": "update-rebilling",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "companyId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpdateRebillingDto"
+    }
+  },
+  {
+    "name": "official_saas_api_get_agency_plans",
+    "method": "GET",
+    "path": "/saas/agency-plans/{companyId}",
+    "app": "saas-api",
+    "summary": "Get Agency Plans",
+    "operationId": "get-agency-plans",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "companyId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_saas_api_get_location_subscription",
+    "method": "GET",
+    "path": "/saas/get-saas-subscription/{locationId}",
+    "app": "saas-api",
+    "summary": "Get Location Subscription Details",
+    "operationId": "get-location-subscription",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId"
+    ],
+    "queryParams": [
+      {
+        "name": "companyId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "name": "official_saas_api_bulk_enable_saas",
+    "method": "POST",
+    "path": "/saas/bulk-enable-saas/{companyId}",
+    "app": "saas-api",
+    "summary": "Bulk Enable SaaS",
+    "operationId": "bulk-enable-saas",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "companyId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/BulkEnableSaasRequestDto"
+    }
+  },
+  {
+    "name": "official_saas_api_get_saas_locations",
+    "method": "GET",
+    "path": "/saas/saas-locations/{companyId}",
+    "app": "saas-api",
+    "summary": "Get SaaS Locations",
+    "operationId": "get-saas-locations",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "companyId"
+    ],
+    "queryParams": [
+      {
+        "name": "page",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      }
+    ]
+  },
+  {
+    "name": "official_saas_api_get_saas_plan",
+    "method": "GET",
+    "path": "/saas/saas-plan/{planId}",
+    "app": "saas-api",
+    "summary": "Get SaaS Plan",
+    "operationId": "get-saas-plan",
+    "versions": [
+      "2021-04-15"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "planId"
+    ],
+    "queryParams": [
+      {
+        "name": "companyId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "name": "official_snapshots_get_snapshot_push",
+    "method": "GET",
+    "path": "/snapshots/snapshot-status/{snapshotId}",
+    "app": "snapshots",
+    "summary": "Get Snapshot Push between Dates",
+    "operationId": "get-snapshot-push",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "snapshotId"
+    ],
+    "queryParams": [
+      {
+        "name": "companyId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "from",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "to",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "lastDoc",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Id for last document till what you want to skip"
+      },
+      {
+        "name": "limit",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "name": "official_snapshots_get_latest_snapshot_push",
+    "method": "GET",
+    "path": "/snapshots/snapshot-status/{snapshotId}/location/{locationId}",
+    "app": "snapshots",
+    "summary": "Get Last Snapshot Push",
+    "operationId": "get-latest-snapshot-push",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "snapshotId",
+      "locationId"
+    ],
+    "queryParams": [
+      {
+        "name": "companyId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "name": "official_social_media_posting_start_google_oauth",
+    "method": "GET",
+    "path": "/social-media-posting/oauth/google/start",
+    "app": "social-media-posting",
+    "summary": "Starts OAuth For Google Account",
+    "operationId": "start-google-oauth",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "socialplanner/oauth.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location Id"
+      },
+      {
+        "name": "userId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "User Id"
+      },
+      {
+        "name": "page",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Page"
+      },
+      {
+        "name": "reconnect",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Reconnect"
+      }
+    ]
+  },
+  {
+    "name": "official_social_media_posting_get_google_locations",
+    "method": "GET",
+    "path": "/social-media-posting/oauth/{locationId}/google/locations/{accountId}",
+    "app": "social-media-posting",
+    "summary": "Get google business locations",
+    "operationId": "get-google-locations",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId",
+      "accountId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_social_media_posting_set_google_locations",
+    "method": "POST",
+    "path": "/social-media-posting/oauth/{locationId}/google/locations/{accountId}",
+    "app": "social-media-posting",
+    "summary": "Set google business locations",
+    "operationId": "set-google-locations",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId",
+      "accountId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/AttachGMBLocationDTO"
+    }
+  },
+  {
+    "name": "official_social_media_posting_start_facebook_oauth",
+    "method": "GET",
+    "path": "/social-media-posting/oauth/facebook/start",
+    "app": "social-media-posting",
+    "summary": "Starts OAuth For Facebook Account",
+    "operationId": "start-facebook-oauth",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Account Location Id"
+      },
+      {
+        "name": "userId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "User ID"
+      },
+      {
+        "name": "page",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Facebook Page"
+      },
+      {
+        "name": "reconnect",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Reconnect boolean as string"
+      }
+    ]
+  },
+  {
+    "name": "official_social_media_posting_get_facebook_page_group",
+    "method": "GET",
+    "path": "/social-media-posting/oauth/{locationId}/facebook/accounts/{accountId}",
+    "app": "social-media-posting",
+    "summary": "Get facebook pages",
+    "operationId": "get-facebook-page-group",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId",
+      "accountId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_social_media_posting_attach_facebook_page_group",
+    "method": "POST",
+    "path": "/social-media-posting/oauth/{locationId}/facebook/accounts/{accountId}",
+    "app": "social-media-posting",
+    "summary": "Attach facebook pages",
+    "operationId": "attach-facebook-page-group",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId",
+      "accountId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/AttachFBAccountDTO"
+    }
+  },
+  {
+    "name": "official_social_media_posting_start_instagram_oauth",
+    "method": "GET",
+    "path": "/social-media-posting/oauth/instagram/start",
+    "app": "social-media-posting",
+    "summary": "Starts OAuth For Instagram Account",
+    "operationId": "start-instagram-oauth",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "socialplanner/oauth.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location Id"
+      },
+      {
+        "name": "userId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "User Id"
+      },
+      {
+        "name": "page",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Page"
+      },
+      {
+        "name": "reconnect",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Reconnect"
+      }
+    ]
+  },
+  {
+    "name": "official_social_media_posting_get_instagram_page_group",
+    "method": "GET",
+    "path": "/social-media-posting/oauth/{locationId}/instagram/accounts/{accountId}",
+    "app": "social-media-posting",
+    "summary": "Get Instagram Professional Accounts",
+    "operationId": "get-instagram-page-group",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId",
+      "accountId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_social_media_posting_attach_instagram_page_group",
+    "method": "POST",
+    "path": "/social-media-posting/oauth/{locationId}/instagram/accounts/{accountId}",
+    "app": "social-media-posting",
+    "summary": "Attach Instagram Professional Accounts",
+    "operationId": "attach-instagram-page-group",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId",
+      "accountId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/AttachIGAccountDTO"
+    }
+  },
+  {
+    "name": "official_social_media_posting_start_linkedin_oauth",
+    "method": "GET",
+    "path": "/social-media-posting/oauth/linkedin/start",
+    "app": "social-media-posting",
+    "summary": "Starts OAuth For LinkedIn Account",
+    "operationId": "start-linkedin-oauth",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location Id"
+      },
+      {
+        "name": "userId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "User Id"
+      },
+      {
+        "name": "page",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Page"
+      },
+      {
+        "name": "reconnect",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Reconnect"
+      }
+    ]
+  },
+  {
+    "name": "official_social_media_posting_get_linkedin_page_profile",
+    "method": "GET",
+    "path": "/social-media-posting/oauth/{locationId}/linkedin/accounts/{accountId}",
+    "app": "social-media-posting",
+    "summary": "Get Linkedin pages and profile",
+    "operationId": "get-linkedin-page-profile",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId",
+      "accountId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_social_media_posting_attach_linkedin_page_profile",
+    "method": "POST",
+    "path": "/social-media-posting/oauth/{locationId}/linkedin/accounts/{accountId}",
+    "app": "social-media-posting",
+    "summary": "Attach linkedin pages and profile",
+    "operationId": "attach-linkedin-page-profile",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId",
+      "accountId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/AttachLinkedinAccountDTO"
+    }
+  },
+  {
+    "name": "official_social_media_posting_start_twitter_oauth",
+    "method": "GET",
+    "path": "/social-media-posting/oauth/twitter/start",
+    "app": "social-media-posting",
+    "summary": "Starts OAuth For Twitter Account",
+    "operationId": "start-twitter-oauth",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "socialplanner/oauth.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location Id"
+      },
+      {
+        "name": "userId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "User Id"
+      },
+      {
+        "name": "page",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Page"
+      },
+      {
+        "name": "reconnect",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Reconnect"
+      }
+    ]
+  },
+  {
+    "name": "official_social_media_posting_get_twitter_profile",
+    "method": "GET",
+    "path": "/social-media-posting/oauth/{locationId}/twitter/accounts/{accountId}",
+    "app": "social-media-posting",
+    "summary": "Get Twitter profile",
+    "operationId": "get-twitter-profile",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId",
+      "accountId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_social_media_posting_attach_twitter_profile",
+    "method": "POST",
+    "path": "/social-media-posting/oauth/{locationId}/twitter/accounts/{accountId}",
+    "app": "social-media-posting",
+    "summary": "Attach Twitter profile",
+    "operationId": "attach-twitter-profile",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId",
+      "accountId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/AttachTwitterAccountDTO"
+    }
+  },
+  {
+    "name": "official_social_media_posting_start_tiktok_oauth",
+    "method": "GET",
+    "path": "/social-media-posting/oauth/tiktok/start",
+    "app": "social-media-posting",
+    "summary": "Starts OAuth For Tiktok Account",
+    "operationId": "start-tiktok-oauth",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "socialplanner/oauth.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location Id"
+      },
+      {
+        "name": "userId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "User Id"
+      },
+      {
+        "name": "page",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Page"
+      },
+      {
+        "name": "reconnect",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Reconnect"
+      }
+    ]
+  },
+  {
+    "name": "official_social_media_posting_get_tiktok_profile",
+    "method": "GET",
+    "path": "/social-media-posting/oauth/{locationId}/tiktok/accounts/{accountId}",
+    "app": "social-media-posting",
+    "summary": "Get Tiktok profile",
+    "operationId": "get-tiktok-profile",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId",
+      "accountId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_social_media_posting_attach_tiktok_profile",
+    "method": "POST",
+    "path": "/social-media-posting/oauth/{locationId}/tiktok/accounts/{accountId}",
+    "app": "social-media-posting",
+    "summary": "Attach Tiktok profile",
+    "operationId": "attach-tiktok-profile",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId",
+      "accountId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/AttachTiktokAccountDTO"
+    }
+  },
+  {
+    "name": "official_social_media_posting_start_tiktok_business_oauth",
+    "method": "GET",
+    "path": "/social-media-posting/oauth/tiktok-business/start",
+    "app": "social-media-posting",
+    "summary": "Starts OAuth For Tiktok Business Account",
+    "operationId": "start-tiktok-business-oauth",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "socialplanner/oauth.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Location Id"
+      },
+      {
+        "name": "userId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "User Id"
+      },
+      {
+        "name": "page",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Page"
+      },
+      {
+        "name": "reconnect",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Reconnect"
+      }
+    ]
+  },
+  {
+    "name": "official_social_media_posting_get_tiktok_business_profile",
+    "method": "GET",
+    "path": "/social-media-posting/oauth/{locationId}/tiktok-business/accounts/{accountId}",
+    "app": "social-media-posting",
+    "summary": "Get Tiktok Business profile",
+    "operationId": "get-tiktok-business-profile",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId",
+      "accountId"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_social_media_posting_get_categories_location_id",
+    "method": "GET",
+    "path": "/social-media-posting/{locationId}/categories",
+    "app": "social-media-posting",
+    "summary": "Get categories by location id",
+    "operationId": "get-categories-location-id",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "socialplanner/category.readonly"
+    ],
+    "pathParams": [
+      "locationId"
+    ],
+    "queryParams": [
+      {
+        "name": "searchText",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Search text string"
+      },
+      {
+        "name": "limit",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Limit"
+      },
+      {
+        "name": "skip",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Skip"
+      }
+    ]
+  },
+  {
+    "name": "official_social_media_posting_get_categories_id",
+    "method": "GET",
+    "path": "/social-media-posting/{locationId}/categories/{id}",
+    "app": "social-media-posting",
+    "summary": "Get categories by id",
+    "operationId": "get-categories-id",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId",
+      "id"
+    ],
+    "queryParams": []
+  },
+  {
+    "name": "official_social_media_posting_get_tags_location_id",
+    "method": "GET",
+    "path": "/social-media-posting/{locationId}/tags",
+    "app": "social-media-posting",
+    "summary": "Get tags by location id",
+    "operationId": "get-tags-location-id",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId"
+    ],
+    "queryParams": [
+      {
+        "name": "searchText",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Search text string"
+      },
+      {
+        "name": "limit",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Limit"
+      },
+      {
+        "name": "skip",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Skip"
+      }
+    ]
+  },
+  {
+    "name": "official_social_media_posting_get_tags_by_ids",
+    "method": "POST",
+    "path": "/social-media-posting/{locationId}/tags/details",
+    "app": "social-media-posting",
+    "summary": "Get tags by ids",
+    "operationId": "get-tags-by-ids",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [],
+    "pathParams": [
+      "locationId"
+    ],
+    "queryParams": [],
+    "requestBodySchema": {
+      "$ref": "#/components/schemas/UpdateTagDTO"
+    }
+  },
+  {
+    "name": "official_surveys_get_surveys_submissions",
+    "method": "GET",
+    "path": "/surveys/submissions",
+    "app": "surveys",
+    "summary": "Get Surveys Submissions",
+    "operationId": "get-surveys-submissions",
+    "versions": [
+      "2021-07-28"
+    ],
+    "scopes": [
+      "surveys.readonly"
+    ],
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locationId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "page",
+        "required": false,
+        "schema": {
+          "default": 1,
+          "type": "number"
+        },
+        "description": "Page No. By default it will be 1"
+      },
+      {
+        "name": "limit",
+        "required": false,
+        "schema": {
+          "default": 20,
+          "type": "number"
+        },
+        "description": "Limit Per Page records count. will allow maximum up to 100 and default will be 20"
+      },
+      {
+        "name": "surveyId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Filter submission by survey id"
+      },
+      {
+        "name": "q",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Filter by contactId, name, email or phone no."
+      },
+      {
+        "name": "startAt",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Get submission by starting of this date. By default it will be same date of last month(YYYY-MM-DD)."
+      },
+      {
+        "name": "endAt",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Get submission by ending of this date. By default it will be current date(YYYY-MM-DD)."
+      }
+    ]
+  }
+]

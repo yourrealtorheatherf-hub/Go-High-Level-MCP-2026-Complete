@@ -1562,24 +1562,30 @@ export class GHLApiClient {
    * Generic request method for new endpoints
    * Used by new tool modules that don't have specific client methods yet
    */
-  async makeRequest<T = any>(method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE', path: string, body?: Record<string, unknown>): Promise<GHLApiResponse<T>> {
+  async makeRequest<T = any>(
+    method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE',
+    path: string,
+    body?: Record<string, unknown>,
+    options?: { version?: string }
+  ): Promise<GHLApiResponse<T>> {
     try {
+      const requestConfig = options?.version ? { headers: { Version: options.version } } : undefined;
       let response;
       switch (method) {
         case 'GET':
-          response = await this.axiosInstance.get(path);
+          response = await this.axiosInstance.get(path, requestConfig);
           break;
         case 'POST':
-          response = await this.axiosInstance.post(path, body);
+          response = await this.axiosInstance.post(path, body, requestConfig);
           break;
         case 'PUT':
-          response = await this.axiosInstance.put(path, body);
+          response = await this.axiosInstance.put(path, body, requestConfig);
           break;
         case 'PATCH':
-          response = await this.axiosInstance.patch(path, body);
+          response = await this.axiosInstance.patch(path, body, requestConfig);
           break;
         case 'DELETE':
-          response = await this.axiosInstance.delete(path);
+          response = await this.axiosInstance.delete(path, requestConfig);
           break;
       }
       return this.wrapResponse(response.data);
@@ -2903,8 +2909,8 @@ export class GHLApiClient {
 
       const recordingResponse: GHLMessageRecordingResponse = {
         audioData: response.data,
-        contentType: response.headers['content-type'] || 'audio/x-wav',
-        contentDisposition: response.headers['content-disposition'] || 'attachment; filename=audio.wav'
+        contentType: String(response.headers['content-type'] || 'audio/x-wav'),
+        contentDisposition: String(response.headers['content-disposition'] || 'attachment; filename=audio.wav')
       };
 
       return this.wrapResponse(recordingResponse);
@@ -6855,4 +6861,4 @@ export class GHLApiClient {
       throw error;
     }
   }
-} 
+}

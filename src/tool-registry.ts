@@ -57,6 +57,9 @@ import { ProposalsTools } from './tools/proposals-tools.js';
 import { CustomMenusTools } from './tools/custom-menus-tools.js';
 import { MarketplaceTools } from './tools/marketplace-tools.js';
 import { AgentStudioTools } from './tools/agent-studio-tools.js';
+import { NotesTools } from './tools/notes-tools.js';
+import { OfficialSpecTools } from './tools/official-spec-tools.js';
+import { WorkflowInsightsTools } from './tools/workflow-insights-tools.js';
 
 // ─── Types ──────────────────────────────────────────────────
 
@@ -197,6 +200,9 @@ export class ToolRegistry {
     const customMenusTools = new CustomMenusTools(ghl);
     const marketplaceTools = new MarketplaceTools(ghl);
     const agentStudioTools = new AgentStudioTools(ghl);
+    const notesTools = new NotesTools(ghl);
+    const officialSpecTools = new OfficialSpecTools(ghl);
+    const workflowInsightsTools = new WorkflowInsightsTools(ghl);
 
     // Register legacy modules (executeTool pattern)
     this.addModule('contact', contactTools, 'getToolDefinitions', 'executeTool');
@@ -246,6 +252,9 @@ export class ToolRegistry {
     this.addModule('customMenus', customMenusTools, 'getToolDefinitions', 'handleToolCall');
     this.addModule('marketplace', marketplaceTools, 'getToolDefinitions', 'handleToolCall');
     this.addModule('agentStudio', agentStudioTools, 'getToolDefinitions', 'handleToolCall');
+    this.addModule('notes', notesTools, 'getToolDefinitions', 'handleToolCall');
+    this.addModule('officialSpec', officialSpecTools, 'getToolDefinitions', 'handleToolCall');
+    this.addModule('workflowInsights', workflowInsightsTools, 'getToolDefinitions', 'handleToolCall');
 
     // Workflow Builder — internal API with Firebase auth (no GHL API client dependency)
     const workflowBuilderTools = new WorkflowBuilderTools();

@@ -92,7 +92,7 @@ class GHLMCPHttpServer {
     const config: GHLConfig = {
       accessToken: process.env.GHL_API_KEY || '',
       baseUrl: process.env.GHL_BASE_URL || 'https://services.leadconnectorhq.com',
-      version: '2021-07-28',
+      version: process.env.GHL_API_VERSION || '2021-07-28',
       locationId: process.env.GHL_LOCATION_ID || ''
     };
 
@@ -106,6 +106,7 @@ class GHLMCPHttpServer {
 
     console.log('[GHL MCP HTTP] Initializing GHL API client...');
     console.log(`[GHL MCP HTTP] Base URL: ${config.baseUrl}`);
+    console.log(`[GHL MCP HTTP] Version: ${config.version}`);
     console.log(`[GHL MCP HTTP] Location ID: ${config.locationId}`);
 
     return new GHLApiClient(config);
