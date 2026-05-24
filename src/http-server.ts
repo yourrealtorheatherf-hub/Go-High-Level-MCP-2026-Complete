@@ -50,7 +50,8 @@ class GHLMCPHttpServer {
       allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
       credentials: true
     }));
-    this.app.use(express.json());
+    // PATCH 2: 50MB body limit (source-sync-patches Patch 2)
+    this.app.use(express.json({ limit: '50mb' }));
   }
 
   private initializeGHLClient(): GHLApiClient {

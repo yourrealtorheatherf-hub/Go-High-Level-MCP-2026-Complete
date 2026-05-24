@@ -362,28 +362,30 @@ export class AgentStudioTools {
       }
 
       // ─── Update agent version (graph) ──────────────────────────────────────
+      // PATCH 3: inject locationId into URL + body (source-sync-patches Patch 3)
       case 'ghl_update_agent_version': {
         const body: Record<string, unknown> = {};
         if (args.nodes !== undefined) body.nodes = args.nodes;
         if (args.edges !== undefined) body.edges = args.edges;
         if (args.variables !== undefined) body.variables = args.variables;
         if (args.config !== undefined) body.config = args.config;
-        return this.ghlClient.makeRequest(
-          'PATCH',
-          `/agent-studio/agent/versions/${args.versionId}`,
-          body,
-        );
+        if (locationId) body.locationId = locationId;
+        const versionUrl = locationId
+          ? `/agent-studio/agent/versions/${args.versionId}?locationId=${locationId}`
+          : `/agent-studio/agent/versions/${args.versionId}`;
+        return this.ghlClient.makeRequest('PATCH', versionUrl, body);
       }
 
       // ─── Deploy agent ──────────────────────────────────────────────────────
+      // PATCH 3: inject locationId into URL + body (source-sync-patches Patch 3)
       case 'ghl_deploy_agent': {
         const body: Record<string, unknown> = {};
         if (args.notes !== undefined) body.notes = args.notes;
-        return this.ghlClient.makeRequest(
-          'POST',
-          `/agent-studio/agent/${args.agentId}/deploy`,
-          body,
-        );
+        if (locationId) body.locationId = locationId;
+        const deployUrl = locationId
+          ? `/agent-studio/agent/${args.agentId}/deploy?locationId=${locationId}`
+          : `/agent-studio/agent/${args.agentId}/deploy`;
+        return this.ghlClient.makeRequest('POST', deployUrl, body);
       }
 
       default:

@@ -1,7 +1,12 @@
 /**
- * GoHighLevel MCP Server
+ * GoHighLevel MCP Server — Multi-Tenant Edition
  *
- * Streamable HTTP transport with optional legacy SSE support.
+ * Streamable HTTP transport with mandatory per-tenant authentication.
+ * All /mcp requests MUST carry a Bearer API key (or x-ghl-access-token +
+ * x-ghl-location-id headers in dev mode). Static GHL_API_KEY env var
+ * fallback has been intentionally removed.
+ *
+ * Multi-tenant security layer wired in: May 2026
  */
 
 import express from 'express';
@@ -15,7 +20,7 @@ import { SSEServerTransport } from '@modelcontextprotocol/sdk/server/sse.js';
 import { EnhancedGHLClient } from './enhanced-ghl-client.js';
 import { ToolRegistry } from './tool-registry.js';
 import { GHLConfig } from './types/ghl-types.js';
-import { registerExecuteRoutes } from './execute-route.js';
+import { initMultiTenantSecurity, AuthenticatedRequest } from './multi-tenant/index.js';
 
 dotenv.config();
 
@@ -25,21 +30,19 @@ const MIN_LEVEL: LogLevel = (process.env.LOG_LEVEL as LogLevel) || 'info';
 
 function log(level: LogLevel, msg: string, data?: Record<string, unknown>) {
   if (LOG_LEVELS[level] < LOG_LEVELS[MIN_LEVEL]) return;
-  const out = level === 'error' ? process.stderr : process.stderr;
+  const out = process.stderr;
   out.write(JSON.stringify({ ts: new Date().toISOString(), level, msg, ...(data || {}) }) + '\n');
 }
 
-function readConfig(): GHLConfig {
-  const config: GHLConfig = {
-    accessToken: process.env.GHL_API_KEY || '',
+/** Build a per-request GHL config from authenticated tenant context */
+function tenantConfig(req: AuthenticatedRequest): GHLConfig {
+  const tenant = req.tenant!;
+  return {
+    accessToken: tenant.ghlToken,
     baseUrl: process.env.GHL_BASE_URL || 'https://services.leadconnectorhq.com',
     version: process.env.GHL_API_VERSION || '2021-07-28',
-    locationId: process.env.GHL_LOCATION_ID || '',
+    locationId: tenant.locationId,
   };
-
-  if (!config.accessToken) throw new Error('GHL_API_KEY is required');
-  if (!config.locationId) throw new Error('GHL_LOCATION_ID is required');
-  return config;
 }
 
 function createMcpServer(client: EnhancedGHLClient): McpServer {
@@ -52,50 +55,119 @@ function createMcpServer(client: EnhancedGHLClient): McpServer {
 }
 
 async function main() {
-  const port = parseInt(process.env.PORT || process.env.MCP_SERVER_PORT || '8000', 10);
-  const config = readConfig();
-  const ghlClient = new EnhancedGHLClient(config);
-  const registry = new ToolRegistry(ghlClient);
-  const toolCount = registry.getToolCount();
+  const port = parseInt(process.env.PORT || process.env.MCP_SERVER_PORT || '3001', 10);
+  const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
   const startTime = Date.now();
 
-  log('info', 'Initializing GHL MCP server', {
-    baseUrl: config.baseUrl,
-    version: config.version,
-    locationId: config.locationId,
-    tools: toolCount,
+  if (!mongoUri) {
+    throw new Error('[multi-tenant] MONGO_URI is required. Set it in your environment.');
+  }
+
+  log('info', 'Initializing multi-tenant GHL MCP server', {
+    port,
+    mongoUri: mongoUri.replace(/:([^@]+)@/, ':***@'),
   });
 
-  await ghlClient.testConnection();
+  // ── Multi-Tenant Security Layer ─────────────────────────────────────────────
+  const security = await initMultiTenantSecurity({
+    mongoUri,
+    dbName: process.env.MONGO_DB || 'busybee',
+    redisUrl: process.env.REDIS_URL || 'redis://localhost:6379',
+    // Allow direct header override when not in production (dev/testing)
+    allowHeaderOverride: process.env.NODE_ENV !== 'production',
+  });
 
+  log('info', 'Multi-tenant security initialized');
+
+  // Lightweight client for tool count only — no live API calls at boot
+  const baseConfig: GHLConfig = {
+    accessToken: 'multi-tenant-mode',
+    baseUrl: process.env.GHL_BASE_URL || 'https://services.leadconnectorhq.com',
+    version: process.env.GHL_API_VERSION || '2021-07-28',
+    locationId: 'multi-tenant-mode',
+  };
+  const baseClient = new EnhancedGHLClient(baseConfig);
+  const baseRegistry = new ToolRegistry(baseClient);
+  const toolCount = baseRegistry.getToolCount();
+
+  // ── Express App ─────────────────────────────────────────────────────────────
   const app = express();
+
   app.use(cors({
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
       if (/^https?:\/\/localhost(:\d+)?$/.test(origin) ||
           origin === 'https://chatgpt.com' ||
-          origin === 'https://chat.openai.com') {
+          origin === 'https://chat.openai.com' ||
+          origin === 'https://claude.ai') {
         return callback(null, true);
       }
       callback(new Error('CORS not allowed'));
     },
     methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'mcp-session-id', 'x-ghl-access-token', 'x-ghl-location-id'],
+    allowedHeaders: [
+      'Content-Type', 'Authorization', 'Accept',
+      'mcp-session-id', 'x-ghl-access-token', 'x-ghl-location-id',
+    ],
     credentials: true,
   }));
-  app.use(express.json());
+
+  // PATCH 1: 50MB body limit (source-sync-patches Patch 1)
+  app.use(express.json({ limit: '50mb' }));
+
   app.use((req, _res, next) => {
     log('debug', `${req.method} ${req.path}`, { ip: req.ip });
     next();
   });
 
-  app.all('/mcp', async (req, res) => {
+  // ── Public endpoints (no auth) ──────────────────────────────────────────────
+
+  app.get('/', (_req, res) => {
+    res.json({
+      name: 'GoHighLevel MCP Server (Multi-Tenant)',
+      version: '2.0.0',
+      mode: 'multi-tenant',
+      status: 'running',
+      uptime: Math.floor((Date.now() - startTime) / 1000),
+      endpoints: { health: '/health', capabilities: '/capabilities', mcp: '/mcp', sse: '/sse' },
+      tools: { total: toolCount },
+      auth: 'Bearer token required for /mcp',
+    });
+  });
+
+  app.get('/health', (_req, res) => {
+    const mem = process.memoryUsage();
+    res.json({
+      status: 'healthy',
+      server: 'ghl-mcp-server',
+      version: '2.0.0',
+      mode: 'multi-tenant',
+      uptime: Math.floor((Date.now() - startTime) / 1000),
+      timestamp: new Date().toISOString(),
+      tools: toolCount,
+      memory: {
+        rss: `${Math.round(mem.rss / 1024 / 1024)}MB`,
+        heapUsed: `${Math.round(mem.heapUsed / 1024 / 1024)}MB`,
+        heapTotal: `${Math.round(mem.heapTotal / 1024 / 1024)}MB`,
+      },
+    });
+  });
+
+  app.get('/capabilities', (_req, res) => {
+    res.json({
+      capabilities: { tools: {} },
+      server: { name: 'ghl-mcp-server', version: '2.0.0' },
+      transport: ['streamable-http', 'sse'],
+      auth: 'bearer-token',
+    });
+  });
+
+  // ── Protected /mcp — auth + rate limit mandatory ────────────────────────────
+
+  app.all('/mcp', security.authMiddleware, security.rateLimitMiddleware, async (req: AuthenticatedRequest, res) => {
     try {
-      const reqAccessToken = req.headers['x-ghl-access-token'] as string | undefined;
-      const reqLocationId = req.headers['x-ghl-location-id'] as string | undefined;
-      const client = reqAccessToken && reqLocationId
-        ? new EnhancedGHLClient({ ...config, accessToken: reqAccessToken, locationId: reqLocationId })
-        : ghlClient;
+      const cfg = tenantConfig(req);
+      const client = new EnhancedGHLClient(cfg);
       const requestServer = createMcpServer(client);
       const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined });
       await requestServer.connect(transport);
@@ -109,12 +181,15 @@ async function main() {
     }
   });
 
-  const handleSSE = async (req: express.Request, res: express.Response) => {
-    const sessionId = String(req.query.sessionId || 'unknown');
-    log('info', 'SSE connection', { sessionId });
+  // ── SSE — auth required ─────────────────────────────────────────────────────
 
+  const handleSSE = async (req: AuthenticatedRequest, res: express.Response) => {
+    const sessionId = String(req.query.sessionId || 'unknown');
+    log('info', 'SSE connection', { sessionId, locationId: req.tenant?.locationId });
     try {
-      const sseServer = createMcpServer(ghlClient);
+      const cfg = tenantConfig(req);
+      const client = new EnhancedGHLClient(cfg);
+      const sseServer = createMcpServer(client);
       const transport = new SSEServerTransport('/sse', res);
       await sseServer.connect(transport);
       req.on('close', () => {
@@ -128,96 +203,68 @@ async function main() {
     }
   };
 
-  app.get('/sse', handleSSE);
-  app.post('/sse', handleSSE);
+  app.get('/sse', security.authMiddleware, handleSSE);
+  app.post('/sse', security.authMiddleware, handleSSE);
 
-  app.get('/', (_req, res) => {
-    res.json({
-      name: 'GoHighLevel MCP Server',
-      version: '2.0.0',
-      status: 'running',
-      uptime: Math.floor((Date.now() - startTime) / 1000),
-      endpoints: {
-        health: '/health',
-        capabilities: '/capabilities',
-        tools: '/tools',
-        execute: '/execute',
-        mcp: '/mcp',
-        sse: '/sse',
-      },
-      tools: registry.getToolCounts(),
-      cache: ghlClient.getCacheStats(),
-    });
-  });
+  // ── Admin credential management API ────────────────────────────────────────
 
-  app.get('/health', (_req, res) => {
-    const mem = process.memoryUsage();
-    res.json({
-      status: 'healthy',
-      server: 'ghl-mcp-server',
-      version: '2.0.0',
-      uptime: Math.floor((Date.now() - startTime) / 1000),
-      timestamp: new Date().toISOString(),
-      tools: toolCount,
-      memory: {
-        rss: `${Math.round(mem.rss / 1024 / 1024)}MB`,
-        heapUsed: `${Math.round(mem.heapUsed / 1024 / 1024)}MB`,
-        heapTotal: `${Math.round(mem.heapTotal / 1024 / 1024)}MB`,
-      },
-      cache: ghlClient.getCacheStats(),
-    });
-  });
-
-  app.get('/capabilities', (_req, res) => {
-    res.json({
-      capabilities: { tools: {} },
-      server: { name: 'ghl-mcp-server', version: '2.0.0' },
-      transport: ['streamable-http', 'sse'],
-    });
-  });
-
-  registerExecuteRoutes(app, registry, config);
-
-  app.get('/tool-inventory', (_req, res) => {
-    res.json({
-      tools: registry.getToolInventory(),
-      count: registry.getToolCount(),
-      generatedAt: new Date().toISOString(),
-    });
-  });
-
-  app.post('/tools/call', async (req, res) => {
-    const { name, arguments: args } = req.body;
-    if (!name) {
-      res.status(400).json({ error: 'Missing tool name' });
+  app.post('/admin/credentials', async (req, res) => {
+    const adminKey = req.headers['x-admin-key'];
+    if (adminKey !== process.env.ADMIN_SECRET) {
+      res.status(403).json({ error: 'Admin key required' });
       return;
     }
-
+    const { locationId, pitToken, scopes, metadata } = req.body;
+    if (!locationId || !pitToken) {
+      res.status(400).json({ error: 'locationId and pitToken required' });
+      return;
+    }
     try {
-      const result = await registry.callTool(name, args || {});
-      if (result === undefined) {
-        res.status(404).json({ error: `Unknown tool: ${name}` });
-        return;
-      }
-      res.json({ result });
-    } catch (err: any) {
-      log('error', `REST tool error: ${name}`, { error: err.message });
-      res.status(500).json({ error: `Tool execution failed: ${err.message}` });
+      await security.credStore.registerCredential(locationId, pitToken, scopes || [], metadata);
+      res.json({ success: true, locationId });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
     }
   });
 
-  app.listen(port, '0.0.0.0', () => {
-    console.log('GoHighLevel MCP Server v2.0');
-    console.log(`Server: http://0.0.0.0:${port}`);
-    console.log(`Streamable HTTP: http://0.0.0.0:${port}/mcp`);
-    console.log(`Legacy SSE: http://0.0.0.0:${port}/sse`);
-    console.log(`Tools: ${toolCount}`);
+  app.get('/admin/credentials', async (req, res) => {
+    const adminKey = req.headers['x-admin-key'];
+    if (adminKey !== process.env.ADMIN_SECRET) {
+      res.status(403).json({ error: 'Admin key required' });
+      return;
+    }
+    const creds = await security.credStore.listActive();
+    res.json({
+      credentials: creds.map(c => ({
+        locationId: c.locationId,
+        expires_at: c.expires_at,
+        active: c.active,
+        metadata: c.metadata,
+      })),
+    });
   });
 
-}
+  // ── Start server ────────────────────────────────────────────────────────────
 
-process.on('SIGINT', () => { log('info', 'Shutting down (SIGINT)'); process.exit(0); });
-process.on('SIGTERM', () => { log('info', 'Shutting down (SIGTERM)'); process.exit(0); });
+  app.listen(port, '0.0.0.0', () => {
+    console.log('GoHighLevel MCP Server v2.0 — Multi-Tenant Edition');
+    console.log(`Server:           http://0.0.0.0:${port}`);
+    console.log(`Streamable HTTP:  http://0.0.0.0:${port}/mcp  [AUTH REQUIRED]`);
+    console.log(`Legacy SSE:       http://0.0.0.0:${port}/sse  [AUTH REQUIRED]`);
+    console.log(`Tools:            ${toolCount}`);
+    console.log(`Auth:             Bearer token (MongoDB-backed API keys)`);
+    console.log(`Admin:            POST /admin/credentials (x-admin-key required)`);
+  });
+
+  // Graceful shutdown
+  for (const sig of ['SIGINT', 'SIGTERM']) {
+    process.on(sig, async () => {
+      log('info', `Shutting down (${sig})`);
+      await security.shutdown();
+      process.exit(0);
+    });
+  }
+}
 
 main().catch((err) => {
   log('error', 'Fatal error', { error: err.message, stack: err.stack });
