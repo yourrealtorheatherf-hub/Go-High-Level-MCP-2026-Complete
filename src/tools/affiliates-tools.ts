@@ -1,505 +1,158 @@
 /**
  * GoHighLevel Affiliates Tools
- * Tools for managing affiliate marketing program
+ *
+ * Rewritten 2026-06-23 (_AFFILIATE_BACKEND_V1): the public affiliate API
+ * (services.leadconnectorhq.com/affiliates/...) is DEAD (404). These tools now call the internal
+ * Affiliate Manager backend via AffiliateBuilderClient — LOCATION-SCOPED routes verified live on BizDev.
+ *
+ * v1 ships ONLY live-verified operations. Deliberately omitted until their schemas/paths are reverse-
+ * engineered (see AFFILIATE_PROGRAM_PROJECT.md): campaign CREATE (backend requires a pre-configured
+ * email template — do it in the GHL UI / via snapshot), campaign UPDATE, affiliate campaign/tier
+ * assignment, and external-lead attribution (real path not under /affiliate-manager).
+ *
+ * Interface (constructor(ghlClient) / getToolDefinitions() / handleToolCall()) is UNCHANGED so the
+ * existing tool-registry wiring keeps working. ghlClient is still used for the default locationId.
  */
-
-import { GHLApiClient } from '../clients/ghl-api-client.js';
+import { AffiliateBuilderClient } from '../clients/affiliate-builder-client.js';
 
 export class AffiliatesTools {
-  constructor(private ghlClient: GHLApiClient) {}
+  private ghlClient: any;
+  private aff: AffiliateBuilderClient | null = null;
+
+  constructor(ghlClient: any) {
+    this.ghlClient = ghlClient;
+  }
+
+  private client(): AffiliateBuilderClient {
+    if (!this.aff) this.aff = AffiliateBuilderClient.fromEnv();
+    return this.aff;
+  }
+
+  private loc(args: any): string {
+    if (args && args.locationId) return String(args.locationId);
+    try {
+      const c = this.ghlClient?.getConfig?.();
+      if (c?.locationId) return String(c.locationId);
+    } catch { /* fall through */ }
+    return this.client().getLocationId();
+  }
 
   getToolDefinitions() {
+    const cat = (access: string) => ({ labels: { category: 'affiliates', access, complexity: 'simple' } });
     return [
-      // Affiliate Campaigns
+      // ── Read: program state ───────────────────────────────
+      {
+        name: 'get_affiliate_overview',
+        description: 'Affiliate program overview for a location (campaign + affiliate summary + config) via /init',
+        inputSchema: { type: 'object', properties: { locationId: { type: 'string' } } },
+        _meta: cat('read'),
+      },
       {
         name: 'get_affiliate_campaigns',
-        description: 'Get all affiliate campaigns',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            locationId: { type: 'string', description: 'Location ID' },
-            status: { type: 'string', enum: ['active', 'inactive', 'all'], description: 'Campaign status filter' },
-            limit: { type: 'number', description: 'Max results' },
-            offset: { type: 'number', description: 'Pagination offset' }
-          }
-        },
-        _meta: {
-          labels: {
-            category: "affiliates",
-            access: "read",
-            complexity: "simple"
-          }
-        }
+        description: 'List affiliate campaigns (Sales + Lead) for a location, with transactions/meta',
+        inputSchema: { type: 'object', properties: { locationId: { type: 'string', description: 'Location ID' } } },
+        _meta: cat('read'),
       },
       {
         name: 'get_affiliate_campaign',
-        description: 'Get a specific affiliate campaign',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            campaignId: { type: 'string', description: 'Affiliate Campaign ID' },
-            locationId: { type: 'string', description: 'Location ID' },
-          },
-          required: ['campaignId']
-        },
-        _meta: {
-          labels: {
-            category: "affiliates",
-            access: "read",
-            complexity: "simple"
-          }
-        }
+        description: 'Get one affiliate campaign by id (full config incl. commissionV2/leadCommissionV2, referral links)',
+        inputSchema: { type: 'object', properties: { campaignId: { type: 'string' }, locationId: { type: 'string' } }, required: ['campaignId'] },
+        _meta: cat('read'),
       },
-      {
-        name: 'create_affiliate_campaign',
-        description: 'Create a new affiliate campaign',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            locationId: { type: 'string', description: 'Location ID' },
-            name: { type: 'string', description: 'Campaign name' },
-            description: { type: 'string', description: 'Campaign description' },
-            commissionType: { type: 'string', enum: ['percentage', 'fixed'], description: 'Commission type' },
-            commissionValue: { type: 'number', description: 'Commission value (percentage or fixed amount)' },
-            cookieDays: { type: 'number', description: 'Cookie tracking duration in days' },
-            productIds: { type: 'array', items: { type: 'string' }, description: 'Product IDs for this campaign' },
-          },
-          required: ['name', 'commissionType', 'commissionValue']
-        },
-        _meta: {
-          labels: {
-            category: "affiliates",
-            access: "write",
-            complexity: "simple"
-          }
-        }
-      },
-      {
-        name: 'update_affiliate_campaign',
-        description: 'Update an affiliate campaign',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            campaignId: { type: 'string', description: 'Campaign ID' },
-            locationId: { type: 'string', description: 'Location ID' },
-            name: { type: 'string', description: 'Campaign name' },
-            description: { type: 'string', description: 'Campaign description' },
-            commissionType: { type: 'string', enum: ['percentage', 'fixed'], description: 'Commission type' },
-            commissionValue: { type: 'number', description: 'Commission value' },
-            status: { type: 'string', enum: ['active', 'inactive'], description: 'Campaign status' },
-          },
-          required: ['campaignId']
-        },
-        _meta: {
-          labels: {
-            category: "affiliates",
-            access: "write",
-            complexity: "simple"
-          }
-        }
-      },
-      {
-        name: 'delete_affiliate_campaign',
-        description: 'Delete an affiliate campaign',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            campaignId: { type: 'string', description: 'Campaign ID' },
-            locationId: { type: 'string', description: 'Location ID' },
-          },
-          required: ['campaignId']
-        },
-        _meta: {
-          labels: {
-            category: "affiliates",
-            access: "delete",
-            complexity: "simple"
-          }
-        }
-      },
-
-      // Affiliates
       {
         name: 'get_affiliates',
-        description: 'Get all affiliates',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            locationId: { type: 'string', description: 'Location ID' },
-            campaignId: { type: 'string', description: 'Filter by campaign' },
-            status: { type: 'string', enum: ['pending', 'approved', 'rejected', 'all'], description: 'Status filter' },
-            limit: { type: 'number', description: 'Max results' },
-            offset: { type: 'number', description: 'Pagination offset' }
-          }
-        },
-        _meta: {
-          labels: {
-            category: "affiliates",
-            access: "read",
-            complexity: "simple"
-          }
-        }
+        description: 'List affiliates for a location',
+        inputSchema: { type: 'object', properties: { locationId: { type: 'string' } } },
+        _meta: cat('read'),
       },
       {
         name: 'get_affiliate',
-        description: 'Get a specific affiliate',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            affiliateId: { type: 'string', description: 'Affiliate ID' },
-            locationId: { type: 'string', description: 'Location ID' },
-          },
-          required: ['affiliateId']
-        },
-        _meta: {
-          labels: {
-            category: "affiliates",
-            access: "read",
-            complexity: "simple"
-          }
-        }
+        description: 'Get one affiliate by id (incl. revenue, tier, campaignIds, contact link)',
+        inputSchema: { type: 'object', properties: { affiliateId: { type: 'string' }, locationId: { type: 'string' } }, required: ['affiliateId'] },
+        _meta: cat('read'),
       },
+      {
+        name: 'get_affiliate_stats',
+        description: 'Affiliate performance (revenue/tier/referral counts) — from the affiliate record',
+        inputSchema: { type: 'object', properties: { affiliateId: { type: 'string' }, locationId: { type: 'string' } }, required: ['affiliateId'] },
+        _meta: cat('read'),
+      },
+      {
+        name: 'get_payouts',
+        description: 'List affiliate payouts for a location',
+        inputSchema: { type: 'object', properties: { locationId: { type: 'string' } } },
+        _meta: cat('read'),
+      },
+      {
+        name: 'get_referrals',
+        description: 'List affiliate referral transactions (leads/sales) for a location',
+        inputSchema: { type: 'object', properties: { locationId: { type: 'string' } } },
+        _meta: cat('read'),
+      },
+      // ── Write: affiliate roster (verified) ────────────────
       {
         name: 'create_affiliate',
-        description: 'Create/add a new affiliate',
+        description: 'Add an affiliate by email (optionally name/phone). Campaign enrollment + tier are configured separately after creation.',
         inputSchema: {
           type: 'object',
           properties: {
-            locationId: { type: 'string', description: 'Location ID' },
-            contactId: { type: 'string', description: 'Contact ID to make affiliate' },
-            campaignId: { type: 'string', description: 'Campaign to assign to' },
-            customCode: { type: 'string', description: 'Custom affiliate code' },
-            status: { type: 'string', enum: ['pending', 'approved'], description: 'Initial status' },
+            locationId: { type: 'string' },
+            email: { type: 'string', description: 'Affiliate email (required)' },
+            firstName: { type: 'string' },
+            lastName: { type: 'string' },
+            phone: { type: 'string' },
           },
-          required: ['contactId', 'campaignId']
+          required: ['email'],
         },
-        _meta: {
-          labels: {
-            category: "affiliates",
-            access: "write",
-            complexity: "simple"
-          }
-        }
-      },
-      {
-        name: 'update_affiliate',
-        description: 'Update an affiliate',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            affiliateId: { type: 'string', description: 'Affiliate ID' },
-            locationId: { type: 'string', description: 'Location ID' },
-            status: { type: 'string', enum: ['pending', 'approved', 'rejected'], description: 'Status' },
-            customCode: { type: 'string', description: 'Custom affiliate code' },
-          },
-          required: ['affiliateId']
-        },
-        _meta: {
-          labels: {
-            category: "affiliates",
-            access: "write",
-            complexity: "simple"
-          }
-        }
-      },
-      {
-        name: 'approve_affiliate',
-        description: 'Approve a pending affiliate',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            affiliateId: { type: 'string', description: 'Affiliate ID' },
-            locationId: { type: 'string', description: 'Location ID' },
-          },
-          required: ['affiliateId']
-        },
-        _meta: {
-          labels: {
-            category: "affiliates",
-            access: "read",
-            complexity: "simple"
-          }
-        }
-      },
-      {
-        name: 'reject_affiliate',
-        description: 'Reject/deny a pending affiliate',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            affiliateId: { type: 'string', description: 'Affiliate ID' },
-            locationId: { type: 'string', description: 'Location ID' },
-            reason: { type: 'string', description: 'Rejection reason' },
-          },
-          required: ['affiliateId']
-        },
-        _meta: {
-          labels: {
-            category: "affiliates",
-            access: "read",
-            complexity: "simple"
-          }
-        }
+        _meta: cat('write'),
       },
       {
         name: 'delete_affiliate',
         description: 'Remove an affiliate',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            affiliateId: { type: 'string', description: 'Affiliate ID' },
-            locationId: { type: 'string', description: 'Location ID' },
-          },
-          required: ['affiliateId']
-        },
-        _meta: {
-          labels: {
-            category: "affiliates",
-            access: "delete",
-            complexity: "simple"
-          }
-        }
-      },
-
-      // Commissions & Payouts
-      {
-        name: 'get_affiliate_commissions',
-        description: 'Get commissions for an affiliate',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            affiliateId: { type: 'string', description: 'Affiliate ID' },
-            locationId: { type: 'string', description: 'Location ID' },
-            status: { type: 'string', enum: ['pending', 'approved', 'paid', 'all'], description: 'Status filter' },
-            startDate: { type: 'string', description: 'Start date' },
-            endDate: { type: 'string', description: 'End date' },
-            limit: { type: 'number', description: 'Max results' },
-            offset: { type: 'number', description: 'Pagination offset' },
-          },
-          required: ['affiliateId']
-        },
-        _meta: {
-          labels: {
-            category: "affiliates",
-            access: "read",
-            complexity: "simple"
-          }
-        }
+        inputSchema: { type: 'object', properties: { affiliateId: { type: 'string' }, locationId: { type: 'string' } }, required: ['affiliateId'] },
+        _meta: cat('delete'),
       },
       {
-        name: 'get_affiliate_stats',
-        description: 'Get affiliate performance statistics',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            affiliateId: { type: 'string', description: 'Affiliate ID' },
-            locationId: { type: 'string', description: 'Location ID' },
-            startDate: { type: 'string', description: 'Start date' },
-            endDate: { type: 'string', description: 'End date' },
-          },
-          required: ['affiliateId']
-        },
-        _meta: {
-          labels: {
-            category: "affiliates",
-            access: "read",
-            complexity: "simple"
-          }
-        }
+        name: 'delete_affiliate_campaign',
+        description: 'Delete an affiliate campaign',
+        inputSchema: { type: 'object', properties: { campaignId: { type: 'string' }, locationId: { type: 'string' } }, required: ['campaignId'] },
+        _meta: cat('delete'),
       },
-      {
-        name: 'create_payout',
-        description: 'Create a payout for affiliate',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            affiliateId: { type: 'string', description: 'Affiliate ID' },
-            locationId: { type: 'string', description: 'Location ID' },
-            amount: { type: 'number', description: 'Payout amount' },
-            commissionIds: { type: 'array', items: { type: 'string' }, description: 'Commission IDs to include' },
-            note: { type: 'string', description: 'Payout note' },
-          },
-          required: ['affiliateId', 'amount']
-        },
-        _meta: {
-          labels: {
-            category: "affiliates",
-            access: "write",
-            complexity: "simple"
-          }
-        }
-      },
-      {
-        name: 'get_payouts',
-        description: 'Get affiliate payouts',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            locationId: { type: 'string', description: 'Location ID' },
-            affiliateId: { type: 'string', description: 'Filter by affiliate' },
-            status: { type: 'string', enum: ['pending', 'completed', 'failed', 'all'], description: 'Status filter' },
-            limit: { type: 'number', description: 'Max results' },
-            offset: { type: 'number', description: 'Pagination offset' }
-          }
-        },
-        _meta: {
-          labels: {
-            category: "affiliates",
-            access: "read",
-            complexity: "simple"
-          }
-        }
-      },
-
-      // Referrals
-      {
-        name: 'get_referrals',
-        description: 'Get referrals (leads/sales) from affiliates',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            locationId: { type: 'string', description: 'Location ID' },
-            affiliateId: { type: 'string', description: 'Filter by affiliate' },
-            campaignId: { type: 'string', description: 'Filter by campaign' },
-            type: { type: 'string', enum: ['lead', 'sale', 'all'], description: 'Referral type' },
-            limit: { type: 'number', description: 'Max results' },
-            offset: { type: 'number', description: 'Pagination offset' }
-          }
-        }
-      }
     ];
   }
 
-  async handleToolCall(toolName: string, args: Record<string, unknown>): Promise<unknown> {
-    const config = this.ghlClient.getConfig();
-    const locationId = (args.locationId as string) || config.locationId;
-
+  async handleToolCall(toolName: string, args: any): Promise<any> {
+    const loc = this.loc(args);
+    const c = this.client();
     switch (toolName) {
-      // Campaigns
-      case 'get_affiliate_campaigns': {
-        const params = new URLSearchParams();
-        params.append('locationId', locationId);
-        if (args.status) params.append('status', String(args.status));
-        if (args.limit) params.append('limit', String(args.limit));
-        if (args.offset) params.append('offset', String(args.offset));
-        return this.ghlClient.makeRequest('GET', `/affiliates/campaigns?${params.toString()}`);
-      }
-      case 'get_affiliate_campaign': {
-        return this.ghlClient.makeRequest('GET', `/affiliates/campaigns/${args.campaignId}?locationId=${locationId}`);
-      }
-      case 'create_affiliate_campaign': {
-        return this.ghlClient.makeRequest('POST', `/affiliates/campaigns`, {
-          locationId,
-          name: args.name,
-          description: args.description,
-          commissionType: args.commissionType,
-          commissionValue: args.commissionValue,
-          cookieDays: args.cookieDays,
-          productIds: args.productIds
-        });
-      }
-      case 'update_affiliate_campaign': {
-        const body: Record<string, unknown> = { locationId };
-        if (args.name) body.name = args.name;
-        if (args.description) body.description = args.description;
-        if (args.commissionType) body.commissionType = args.commissionType;
-        if (args.commissionValue) body.commissionValue = args.commissionValue;
-        if (args.status) body.status = args.status;
-        return this.ghlClient.makeRequest('PUT', `/affiliates/campaigns/${args.campaignId}`, body);
-      }
-      case 'delete_affiliate_campaign': {
-        return this.ghlClient.makeRequest('DELETE', `/affiliates/campaigns/${args.campaignId}?locationId=${locationId}`);
-      }
-
-      // Affiliates
-      case 'get_affiliates': {
-        const params = new URLSearchParams();
-        params.append('locationId', locationId);
-        if (args.campaignId) params.append('campaignId', String(args.campaignId));
-        if (args.status) params.append('status', String(args.status));
-        if (args.limit) params.append('limit', String(args.limit));
-        if (args.offset) params.append('offset', String(args.offset));
-        return this.ghlClient.makeRequest('GET', `/affiliates/?${params.toString()}`);
-      }
-      case 'get_affiliate': {
-        return this.ghlClient.makeRequest('GET', `/affiliates/${args.affiliateId}?locationId=${locationId}`);
-      }
+      // Reads
+      case 'get_affiliate_overview':
+        return c.request('GET', `/${loc}/init`);
+      case 'get_affiliate_campaigns':
+        return c.request('GET', `/${loc}/campaigns`);
+      case 'get_affiliate_campaign':
+        return c.request('GET', `/${loc}/campaigns/${args.campaignId}`);
+      case 'get_affiliates':
+        return c.request('GET', `/${loc}/affiliates`);
+      case 'get_affiliate':
+      case 'get_affiliate_stats':
+        return c.request('GET', `/${loc}/affiliates/${args.affiliateId}`);
+      case 'get_payouts':
+        return c.request('GET', `/${loc}/payouts`);
+      case 'get_referrals':
+        return c.request('GET', `/${loc}/transactions`);
+      // Writes (affiliate roster)
       case 'create_affiliate': {
-        return this.ghlClient.makeRequest('POST', `/affiliates/`, {
-          locationId,
-          contactId: args.contactId,
-          campaignId: args.campaignId,
-          customCode: args.customCode,
-          status: args.status
-        });
+        const body: any = { affiliateEmail: args.email };
+        if (args.firstName) body.affiliateFirstName = args.firstName;
+        if (args.lastName) body.affiliateLastName = args.lastName;
+        if (args.phone) body.affiliatePhone = args.phone;
+        return c.request('POST', `/${loc}/affiliates`, body);
       }
-      case 'update_affiliate': {
-        const body: Record<string, unknown> = { locationId };
-        if (args.status) body.status = args.status;
-        if (args.customCode) body.customCode = args.customCode;
-        return this.ghlClient.makeRequest('PUT', `/affiliates/${args.affiliateId}`, body);
-      }
-      case 'approve_affiliate': {
-        return this.ghlClient.makeRequest('POST', `/affiliates/${args.affiliateId}/approve`, { locationId });
-      }
-      case 'reject_affiliate': {
-        return this.ghlClient.makeRequest('POST', `/affiliates/${args.affiliateId}/reject`, {
-          locationId,
-          reason: args.reason
-        });
-      }
-      case 'delete_affiliate': {
-        return this.ghlClient.makeRequest('DELETE', `/affiliates/${args.affiliateId}?locationId=${locationId}`);
-      }
-
-      // Commissions
-      case 'get_affiliate_commissions': {
-        const params = new URLSearchParams();
-        params.append('locationId', locationId);
-        if (args.status) params.append('status', String(args.status));
-        if (args.startDate) params.append('startDate', String(args.startDate));
-        if (args.endDate) params.append('endDate', String(args.endDate));
-        if (args.limit) params.append('limit', String(args.limit));
-        if (args.offset) params.append('offset', String(args.offset));
-        return this.ghlClient.makeRequest('GET', `/affiliates/${args.affiliateId}/commissions?${params.toString()}`);
-      }
-      case 'get_affiliate_stats': {
-        const params = new URLSearchParams();
-        params.append('locationId', locationId);
-        if (args.startDate) params.append('startDate', String(args.startDate));
-        if (args.endDate) params.append('endDate', String(args.endDate));
-        return this.ghlClient.makeRequest('GET', `/affiliates/${args.affiliateId}/stats?${params.toString()}`);
-      }
-      case 'create_payout': {
-        return this.ghlClient.makeRequest('POST', `/affiliates/${args.affiliateId}/payouts`, {
-          locationId,
-          amount: args.amount,
-          commissionIds: args.commissionIds,
-          note: args.note
-        });
-      }
-      case 'get_payouts': {
-        const params = new URLSearchParams();
-        params.append('locationId', locationId);
-        if (args.affiliateId) params.append('affiliateId', String(args.affiliateId));
-        if (args.status) params.append('status', String(args.status));
-        if (args.limit) params.append('limit', String(args.limit));
-        if (args.offset) params.append('offset', String(args.offset));
-        return this.ghlClient.makeRequest('GET', `/affiliates/payouts?${params.toString()}`);
-      }
-
-      // Referrals
-      case 'get_referrals': {
-        const params = new URLSearchParams();
-        params.append('locationId', locationId);
-        if (args.affiliateId) params.append('affiliateId', String(args.affiliateId));
-        if (args.campaignId) params.append('campaignId', String(args.campaignId));
-        if (args.type) params.append('type', String(args.type));
-        if (args.limit) params.append('limit', String(args.limit));
-        if (args.offset) params.append('offset', String(args.offset));
-        return this.ghlClient.makeRequest('GET', `/affiliates/referrals?${params.toString()}`);
-      }
-
+      case 'delete_affiliate':
+        return c.request('DELETE', `/${loc}/affiliates/${args.affiliateId}`);
+      case 'delete_affiliate_campaign':
+        return c.request('DELETE', `/${loc}/campaigns/${args.campaignId}`);
       default:
         throw new Error(`Unknown tool: ${toolName}`);
     }
