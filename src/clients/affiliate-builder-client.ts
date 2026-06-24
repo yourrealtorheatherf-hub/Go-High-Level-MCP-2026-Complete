@@ -130,10 +130,34 @@ export class AffiliateBuilderClient {
   }
 
   /**
+   * Guard (council 2026-06-23): FAIL-CLOSED on destructive ops. Before a write/delete, prove the
+   * agency session is actually healthy (a cheap GET that self-refreshes on 401). If it can't be
+   * validated, REFUSE the destructive op rather than fire it under a dead/ambiguous session.
+   * Reads are exempt (a failed read is harmless and surfaces its own error).
+   */
+  private async assertSessionHealthy(method: string, path: string): Promise<void> {
+    const loc = this.config.locationId;
+    if (!loc) return; // no loc to probe (rare); the op itself still fails-closed at the API on 401
+    try {
+      await this.request('GET', `/${loc}/init`); // GET → no preflight recursion; self-refreshes on 401
+    } catch (e: any) {
+      throw new Error(
+        `Affiliate session unhealthy — REFUSING ${method} ${path} (fail-closed guard). ` +
+        `The agency session could not be validated; check the glitch-299 JWT / ghl-jwt cron. ` +
+        `Underlying: ${e?.message || e}`
+      );
+    }
+  }
+
+  /**
    * Core request. `path` is appended to the affiliate-manager base (e.g. `/{loc}/campaigns`).
    * Retries once after a JWT refresh on 401/403. Returns parsed JSON (or raw text).
+   * Destructive methods (non-GET) run the fail-closed session preflight first.
    */
   async request<T = unknown>(method: string, path: string, body?: unknown): Promise<T> {
+    if (method.toUpperCase() !== 'GET') {
+      await this.assertSessionHealthy(method, path);
+    }
     const url = `${AffiliateBuilderClient.BASE_URL}${path}`;
     const send = async (): Promise<Response> => {
       const opts: RequestInit = { method, headers: this.headers() };
